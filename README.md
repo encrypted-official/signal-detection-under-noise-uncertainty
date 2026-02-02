@@ -1,2 +1,3 @@
-### signal-detection-under-noise-uncertainty
+# signal-detection-under-noise-uncertainty
 
+## Group 11 (Wireless Communication)
