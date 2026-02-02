@@ -14,3 +14,5 @@
 
 - W. Wang, J. Wang and C. Li, "A Signal Detection Method Based on Hybrid Energy Detection," 2022 4th International Conference on Intelligent Control, Measurement and Signal Processing (ICMSP), Hangzhou, China, 2022, pp. 695-700, doi: 10.1109/ICMSP55950.2022.9858978.
 
+kockaya, K., Develi, I. Spectrum sensing in cognitive radio networks: threshold optimization and analysis. J Wireless Com Network 2020, 255 (2020). https://doi.org/10.1186/s13638-020-01870-7
+
