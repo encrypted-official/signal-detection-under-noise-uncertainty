@@ -7,3 +7,10 @@
 - S. Yan, X. Zhou, J. Hu and S. V. Hanly, "Low Probability of Detection Communication: Opportunities and Challenges," in IEEE Wireless Communications, vol. 26, no. 5, pp. 19-25, October 2019, doi: 10.1109/MWC.001.1900057.
 
 - C. Chen, W. Xu, Y. Pan, H. Zhu and J. Wang, "A Nonparametric Approach to Signal Detection in Non-Gaussian Noise," in IEEE Signal Processing Letters, vol. 29, pp. 503-507, 2022, doi: 10.1109/LSP.2022.3143031.
+
+- R. Gao and D. Wang, "A Signal Detection Method Using Goodness of Fit Test in Laplacian Noise," 2018 24th Asia-Pacific Conference on Communications (APCC), Ningbo, China, 2018, pp. 450-453, doi: 10.1109/APCC.2018.8633573.
+
+- M. Lopez-Benitez and F. Casadevall, "Signal Uncertainty in Spectrum Sensing for Cognitive Radio," in IEEE Transactions on Communications, vol. 61, no. 4, pp. 1231-1241, April 2013, doi: 10.1109/TCOMM.2013.021413.110807.
+
+- W. Wang, J. Wang and C. Li, "A Signal Detection Method Based on Hybrid Energy Detection," 2022 4th International Conference on Intelligent Control, Measurement and Signal Processing (ICMSP), Hangzhou, China, 2022, pp. 695-700, doi: 10.1109/ICMSP55950.2022.9858978.
+
