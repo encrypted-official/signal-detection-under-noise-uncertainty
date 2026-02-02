@@ -16,3 +16,7 @@
 
 - kockaya, K., Develi, I. Spectrum sensing in cognitive radio networks: threshold optimization and analysis. J Wireless Com Network 2020, 255 (2020). https://doi.org/10.1186/s13638-020-01870-7
 
+- Zhou, F., Liu, C., Zhang, H., Wu, W., Wu, Q., Quek, T. Q., & Chae, C. B. (2025). SpectrumFM: A foundation model for intelligent spectrum management. IEEE Journal on Selected Areas in Communications.
+  
+- Wang, X., Zheng, P., & Cheng, N. (2025). Erasing Noise in Signal Detection with Diffusion Model: From Theory to Application. arXiv preprint arXiv:2501.07030.
+  
