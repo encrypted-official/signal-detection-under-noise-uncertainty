@@ -24,3 +24,8 @@
   
 - Wang, X., Zheng, P., & Cheng, N. (2025). Erasing Noise in Signal Detection with Diffusion Model: From Theory to Application. arXiv preprint arXiv:2501.07030.
   
+- A. Digham, M.-S. Alouini and M. K. Simon, "Energy Detection of Unknown Signals over Fading Channels," IEEE Transactions on Communications, vol. 55, no. 1, pp. 21-24, Jan. 2007, doi: 10.1109/TCOMM.2006.887483.  
+  https://ieeexplore.ieee.org/abstract/document/1204119
+
+- R. Tandra and A. Sahai, "SNR Walls for Signal Detection," IEEE Journal of Selected Topics in Signal Processing, vol. 2, no. 1, pp. 4-17, Feb. 2008, doi: 10.1109/JSTSP.2007.910267.  
+  https://ieeexplore.ieee.org/abstract/document/4472241
