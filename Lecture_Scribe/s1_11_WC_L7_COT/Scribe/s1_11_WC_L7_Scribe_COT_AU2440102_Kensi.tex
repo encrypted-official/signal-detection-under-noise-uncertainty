@@ -1,0 +1,182 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}}
+\author{Kensi Patel - AU2440102}
+\date{7th February 2026.}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Lecture 7: Expectation, CDFs, PDFs, and Problem Solving}
+
+Instructor: Dhaval Patel, PhD 
+
+Date: January 27, 2025
+
+\section*{Lecture Flow and Logical Dependencies}
+
+\begin{enumerate}
+    \item Random Variables (assumed known from previous lectures)
+    \item Cumulative Distribution Function (CDF)
+    \item Probability Density Function (PDF)
+    \item Expectation of Random Variables
+    \item Expectation of a function of a RV
+    \item Linearity of Expectation
+    \item Moments and Central Moments 
+    \begin{itemize}
+        \item Variance
+        \item Skewness
+        \item Kurtosis
+    \end{itemize}
+\end{enumerate}
+ 
+\section*{1. Cumulative Distribution Function (CDF)}
+
+\textbf{Definition}
+
+For a random variable $X$,
+\[F_X(x) = P(X \le x)\]
+
+This definition applies to both discrete and continuous random variables.
+
+\textbf{Properties of CDF}
+
+For any random variable $X$:
+\begin{enumerate}
+    \item $0 \le F_X(x) \le 1$
+    \item $F_X(x)$ is non-decreasing
+    \item $\lim_{x \to -\infty} F_X(x) = 0$
+    \item $\lim_{x \to +\infty} F_X(x) = 1$
+    \item Right-continuous:
+    \[
+    F_X(x) = \lim_{h \to 0^+} F_X(x+h)
+    \]
+\end{enumerate}
+
+\textbf{Probability Using CDF}
+
+For any $a<b$:
+\[P(a<X\le b) = F_X(b) - F_X(a)\]
+
+\section*{2. Probability Density Function (PDF)}
+
+\textbf{Definition}
+
+For a continuous random variable $X$, the PDF $f_X(x)$ is defined as:
+\[f_X(x) = \frac{d}{dx}F_X(x)\]
+
+\textbf{Relationship Between PDF and CDF}
+\[F_X(x)=\int_{\infty}^{x}f_X(t)\,d\]
+
+\textbf{Properties of PDF}
+\begin{enumerate}
+    \item $f_X(x) \ge 0$ for all $x$
+    \item Total area under the curve equals 1:
+    \[\int_{-\infty}^{\infty} f_X(x)\,dx = 1\]
+    \item Probability over an interval:
+    \[P(a \le X \le b) = \int_a^b f_X(x)\,dx\]
+    \item For continuous RVs:
+    \[P(X=x)=0\]
+\end{enumerate}
+
+\section*{3. Expectation of Random Variables}
+
+\textbf{Definition (Discrete RV)}
+
+If $X$ takes values $x_i$ with probabilities $p(x_i)$:
+\[E[X] = \sum_i x_i\,p(x_i)\]
+
+\textbf{Definition (Continuous RV)}
+\[E[X] = \int_{-\infty}^{\infty} x f_X(x)\,dx\]
+
+\textbf{Interpretation}
+
+Expectation represents the mean (average) value of the random variable.
+
+\section*{4. Expectation of a Function of a Random Variable}
+
+Let $Y=g(X)$
+
+\textbf{Discrete Case}
+\[E[g(X)] = \sum_i g(x_i)\,p(x_i)\]
+
+\textbf{Continuous Case}
+\[E[g(X)] = \int_{-\infty}^{\infty} g(x)f_X(x)\,dx\]
+
+Important: No need to find the PDF of $Y$ explicitly.
+
+\section*{5. Linearity of Expectation}
+
+For random variables $X,Y$ and constants $a,b$:
+\[E[aX+bY] = aE[X] + bE[Y]\]
+
+\textbf{Key Exam Note}
+\begin{itemize}
+    \item Linearity holds regardless of independence
+    \item Applies to any number of RVs
+\end{itemize}
+
+\section*{6. Moments of a Random Variable}
+
+\textbf{n-th Moment (About Origin)}
+\[E[X^n]\]
+
+\textbf{Central Moments}
+
+Defined about the mean $\mu = E[X]$:
+\[E[(X-\mu)^n]\]
+
+\section*{7. Variance}
+
+\textbf{Definition}
+\[\text{Var}(X) = E[(X-\mu)^2]\]
+
+\textbf{Computational Formula}
+\[\text{Var}(X) = E[X^2] - (E[X])^2\]
+
+\textbf{Standard Deviation}
+\[\sigma = \sqrt{\text{Var}(X)}\]
+
+\section*{8. Skewness}
+
+\textbf{Definition}
+
+Third central moment (normalized):
+\[\text{Skewness} = E\left[\left(\frac{X-\mu}{\sigma}\right)^3\right]
+\]
+
+Measures asymmetry of distribution.
+
+\section*{9. Kurtosis}
+
+\textbf{Definition}
+
+Fourth central moment (normalized):
+\[\text{Kurtosis} = E\left[\left(\frac{X-\mu}{\sigma}\right)^4\right]\]
+
+Measures peakedness / tail heaviness.
+
+\section*{Exam-Focused Summary Table}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Concept & Formula \\
+\midrule
+CDF & $F_X(x)=P(X\le x)$ \\
+PDF & $f_X(x)=\dfrac{d}{dx}F_X(x)$ \\
+Expectation & $E[X]=\int x f_X(x)\,dx$ \\
+Linearity & $E[aX+bY]=aE[X]+bE[Y]$ \\
+Variance & $E[X^2]-(E[X])^2$ \\
+Skewness & $E[((X-\mu)/\sigma)^3]$ \\
+Kurtosis & $E[((X-\mu)/\sigma)^4]$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}
