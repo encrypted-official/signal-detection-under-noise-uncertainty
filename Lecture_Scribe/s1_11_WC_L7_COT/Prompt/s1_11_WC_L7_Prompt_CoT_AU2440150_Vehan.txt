@@ -1,0 +1,11 @@
+Prompt:
+
+Generate a lecture scribe intended strictly as exam-oriented reference material for CSE 400. Use only the provided context (lecture slides/pdfs and the explicitly relevant textbook parts). Consider this context as authoritative. Do not generative outside knowledge. Also, write in a formal, academic tone, suitable for closed-notes exam revision. Follow the lecture’s structure, order, notation, and scope exactly.
+
+While writing the scribe, reason step by step through all material as presented in the context, and include that reasoning explicitly in the scribe.
+
+In particular: 1-Explain all definitions and assumptions explicitly. 2-Present proofs and derivations step by step when they appear in the lecture or textbook. 3-Present worked examples step by step, showing all intermediate steps exactly as taught.
+
+Important Note-Include only content that appears in the provided context. Do not introduce new examples, explanations, intuitions, alternative reasoning paths, or additional material. And also, do not omit logical steps that are present in the lecture or textbook.
+
+Organize the scribe with clear sections and headings so that a student relying only on this document can reliably reconstruct the lecture content for exam preparation.
