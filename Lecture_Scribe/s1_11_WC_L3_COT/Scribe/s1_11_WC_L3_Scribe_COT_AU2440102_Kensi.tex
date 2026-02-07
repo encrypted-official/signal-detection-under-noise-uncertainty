@@ -1,0 +1,236 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}}
+
+\author{\textbf{Kensi Patel - AU2440102}}
+
+\date{\textbf{7th February 2026}}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Lecture 3: Introduction to Probability Theory}
+
+\textbf{(Part-0: Course \& Learning Context)}
+
+Instructor: Dr. Dhaval Patel 
+
+Date: January 13, 2026
+
+
+\section*{1. Administrative Context of the Lecture}
+
+\subsection*{1.1 Course Identification}
+
+\begin{itemize}
+    \item Course Code: CSE400
+    \item Course Title: Fundamentals of Probability in Computing
+    \item Lecture Number: 3
+    \item Lecture Theme: Introduction to Probability Theory
+\end{itemize}
+
+\textbf{Note:} This lecture primarily sets up course structure, motivation, and expectations, not formal probability axioms yet.
+
+\section*{2. Instructor and Teaching Team}
+
+\subsection*{2.1 Instructor}
+
+\begin{itemize}
+    \item Name: Dr. Dhaval Patel
+    \item Role: Course Instructor
+    \item Office: Faculty Office, Room-210
+    \item Email: dhaval.patel@ahduni.edu.in
+\end{itemize}
+
+\textbf{Research Areas Mentioned}
+\begin{itemize}
+    \item xG Networks
+    \item Applied ML/DL/RL
+    \item AutoML
+    \item Intelligent Transportation Systems
+    \item Behaviour Modelling using AI
+\end{itemize}
+
+\subsection*{2.2 Teaching Assistants (TAs)}
+
+\begin{itemize}
+    \item Multiple B.Tech (CSE) students (3rd and 4th year)
+    \item Areas include:
+    \begin{itemize}
+        \item Reinforcement Learning
+        \item Spectrum Sensing
+        \item Antenna Systems
+        \item Transportation Systems
+    \end{itemize}
+    \item \textbf{TA hours:} To be finalized (announcement to follow)
+\end{itemize}
+
+\section*{3. Learning Philosophy Emphasized in Class}
+
+\subsection*{3.1 Growth Mindset (Explicitly Shown)}
+
+Statements highlighted in slides:
+\begin{itemize}
+    \item Failure is an opportunity to grow
+    \item Challenges help learning
+    \item Feedback is constructive
+    \item Effort determines ability
+\end{itemize}
+
+\subsection*{3.2 Fixed Mindset (Contrasted)}
+
+\begin{itemize}
+    \item Failure defines limits
+    \item Avoids challenges
+    \item Belief in unchangeable ability
+\end{itemize}
+
+\textbf{Purpose in lecture:} 
+
+To set student attitude expectations for a mathematically rigorous course.
+
+\section*{4. Why Learn CSE400? (Motivation)}
+
+\subsection*{4.1 Daily-Life Motivation}
+
+Probability appears in:
+\begin{itemize}
+    \item Everyday conversations
+    \item Decision-making under uncertainty
+\end{itemize}
+
+\subsection*{4.2 Engineering Applications (Explicit List)}
+
+\begin{itemize}
+    \item Speech Recognition
+    \item Radar Systems
+    \item Communication Networks
+\end{itemize}
+
+These examples justify why probability theory is foundational for computing systems.
+
+\section*{5. Course Infrastructure}
+
+\subsection*{5.1 Active Learning Platform}
+
+\begin{itemize}
+    \item Platform: Campuswire
+    \item Usage:
+    \begin{itemize}       
+        \item Anonymous participation
+        \item Back-channel questions during lectures
+        \item Real-time polling
+        \item Direct messaging (DM) with instructor/TAs
+        \end{itemize}
+\end{itemize}
+
+\subsection*{5.2 Course Website}
+
+Section-1 and Section-2 links are provided through Campuswire.
+
+\section*{6. Lecture Schedule}
+
+\subsection*{6.1 Lecture Sessions}
+
+\textbf{Section-1}
+\begin{itemize}
+    \item 9:30 AM – 11:00 AM
+    \item Tuesday and Thursday
+    \item GICT Room-13
+\end{itemize}
+
+\textbf{Section-2}
+\begin{itemize}
+    \item 1:00 PM – 2:30 PM
+    \item Tuesday and Thursday
+    \item GICT Room-137
+\end{itemize}
+
+\section*{7. Communication and Support Policy}
+
+\subsection*{7.1 Instructor Interaction}
+
+\begin{itemize}
+    \item Contact hours: 24×7 through Campuswire
+    \item Preferred method: Post queries on Campuswire
+    \item Private issues: Direct Message (DM)
+    \item One-to-one discussion possible (student–instructor only)
+\end{itemize}
+
+\section*{8. Assessment Structure}
+
+\subsection*{8.1 Project Component}
+
+\begin{itemize}
+    \item Weightage: 30\%
+    \item Includes:
+    \begin{itemize}
+        \item Team formation
+        \item Mathematical modeling
+        \item Coding
+        \item Randomized algorithms
+        \item Final analysis and bounds
+    \end{itemize}
+
+\end{itemize}
+
+\subsection*{8.2 Project Milestones}
+
+\begin{itemize}
+    \item M1: Problem formulation
+    \item M2: Mathematical modeling (Random Variables, PMF/PDF, CDF, multivariate RVs, joint distributions, etc.)
+    \item M3: Simulation and computation
+    \item M4: Inference and randomized algorithms
+    \item M5: Comparison with deterministic approaches
+    \item M6: Bounds, analysis, and final submission
+\end{itemize}
+
+\section*{9. Lecture Scribe Requirement (Meta-Instruction)}
+
+\subsection*{9.1 Definition (As per course)}
+
+A lecture scribe must:
+\begin{itemize}
+    \item Reflect exact lecture content
+    \item Follow the same structure and terminology
+    \item Avoid:
+    \begin{itemize}
+        \item Simplified tutorials
+        \item Extra intuition
+        \item New examples
+        \item Solution manuals
+    \end{itemize}
+\end{itemize}
+
+\subsection*{9.2 Types of Scribes}
+
+\begin{itemize}
+    \item Lecture Scribe
+    \item Project Scribe
+\end{itemize}
+
+This current document follows the Lecture Scribe format.
+
+\section*{10. Scope Boundary of This Lecture}
+
+\begin{itemize}
+    \item No probability axioms introduced
+    \item No random variables defined
+    \item No PMF, PDF, or CDF derivations
+    \item Focus on course framing, motivation, and learning process
+\end{itemize}
+
+Formal probability theory begins in subsequent lectures.
+
+\section*{11. End of Lecture Notes}
+
+\begin{itemize}
+    \item Open Q\&A session
+    \item No mathematical derivations in this lecture
+    \item Sets foundation for upcoming probability theory lectures
+\end{itemize}
+
+\end{document}
