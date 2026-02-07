@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor} 
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture 3 Scribe}
+\cfoot{\thepage}
+
+\title{\textbf{CSE400 -- Fundamentals of Probability in Computing}\\
+\large Lecture 3: Introduction to Probability Theory}
+\author{\textbf{Name:} Maitri Lad
+\textbf{Enrollnment no.:} AU2440146}
+\date{January 13, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Course Identification and Context}
+
+\begin{itemize}
+    \item \textbf{Course Code:} CSE400
+    \item \textbf{Course Title:} Fundamentals of Probability in Computing
+    \item \textbf{Lecture Number:} 3
+    \item \textbf{Lecture Theme:} Introduction to Probability Theory
+\end{itemize}
+
+This lecture primarily establishes:
+\begin{itemize}
+    \item Course structure and logistics
+    \item Motivation for studying probability
+    \item Engineering relevance
+    \item Project structure and evaluation
+    \item Research orientation (UGRP and MICxN Lab)
+\end{itemize}
+
+\textbf{Note:} No formal probability definitions, axioms, theorems or derivations are introduced in this lecture.
+
+\section{Motivational Slides}
+
+\subsection{Quote on Excellence}
+
+\begin{quote}
+``Good is the enemy of great. That’s why so few things become great.'' -- James C. Collins
+\end{quote}
+
+Purpose: Motivational framing for learning and performance expectations.
+
+\subsection{Growth Mindset}
+
+Statements shown under Growth Mindset:
+\begin{itemize}
+    \item Failure is an opportunity to grow
+    \item I like to try new things
+    \item I can learn to do anything I want
+    \item Challenges help me grow
+    \item My effort and attitude determine my abilities
+    \item Feedback is constructive
+    \item I am inspired by the success of others
+\end{itemize}
+
+\subsection{Fixed Mindset (Contrast)}
+
+Statements shown under Fixed Mindset:
+\begin{itemize}
+    \item Failure is the limit of my abilities
+    \item I’m either good at it or I’m not
+    \item My abilities are unchanging
+    \item I don’t like to be challenged
+    \item My potential is predetermined
+    \item When I’m frustrated, I give up
+    \item I stick to what I know
+\end{itemize}
+
+Purpose: Establishing expected learning attitude for the course.
+
+\section{Lecture Outline (Part 1)}
+
+\subsection{CSE400: General Course Information}
+
+\begin{itemize}
+    \item Team
+    \item Active learning platform: Campuswire
+    \item Schedule
+    \item Grading
+\end{itemize}
+
+\subsection{Why Should We Learn CSE400?}
+
+Example mentioned:
+\begin{itemize}
+    \item Daily life conversations
+\end{itemize}
+
+\subsection{Engineering Applications}
+
+Applications listed:
+\begin{itemize}
+    \item Speech Recognition
+    \item System Radar System
+    \item Communication Network
+\end{itemize}
+
+\section{Course Team Details}
+
+\subsection{Instructor}
+
+\begin{itemize}
+    \item \textbf{Name:} Dr. Dhaval Patel
+    \item \textbf{Role:} Instructor
+    \item \textbf{Office:} Faculty Office (Room--210)
+    \item \textbf{Faculty Profile:} Ahmedabad University SEAS website
+    \item \textbf{Email:} dhaval.patel@ahduni.edu.in
+\end{itemize}
+
+\textbf{Research Areas:}
+\begin{itemize}
+    \item xG Networks
+    \item Applied ML / DL / RL / AutoML
+    \item Intelligent Transportation Systems
+    \item Life Sciences
+    \item Behaviour Modelling using AI
+\end{itemize}
+
+\subsection{Teaching Assistants and Team Members}
+
+\begin{itemize}
+    \item Deep Patel -- BTech CSE (3rd Year)
+    \item Prapti Patel -- BTech CSE (4th Year)
+    \item Raj Koticha -- BTech CSE (4th Year)
+    \item Ritu Patel -- BTech CSE (4th Year)
+    \item Rushi Moliya -- BTech CSE (4th Year)
+    \item Ura Modi -- BTech CSE (3rd Year)
+\end{itemize}
+
+(Each member’s ongoing research area is specified in the slides.)
+
+\section{Active Learning and Class Discussion}
+
+\subsection{Course Website}
+
+\begin{itemize}
+    \item Section--1: Campuswire course link
+    \item Section--2: Campuswire course link
+\end{itemize}
+
+\subsection{Campuswire: Purpose and Usage}
+
+\begin{itemize}
+    \item Build confidence by anonymous participation and back-channel communication
+    \item Collaborative and active learning
+    \item Real-time feedback through polling
+    \item Direct personal communication with instructor/TAs via DM
+\end{itemize}
+
+\section{Course Schedule}
+
+\subsection{Lecture Sessions}
+
+\textbf{Section--1}
+\begin{itemize}
+    \item Time: 9:30 AM -- 11:00 AM
+    \item Days: Tuesday, Thursday
+    \item Venue: GICT Room--136
+\end{itemize}
+
+\textbf{Section--2}
+\begin{itemize}
+    \item Time: 1:00 PM -- 2:30 PM
+    \item Days: Tuesday, Thursday
+    \item Venue: GICT Room--137
+\end{itemize}
+
+\subsection{TA Hours}
+
+\begin{itemize}
+    \item Mode: In-person / Online
+    \item Timings: Yet to be finalized (to be announced)
+\end{itemize}
+
+\section{Communication with Instructor}
+
+\subsection{Discussion and Difficulty Sessions}
+
+\begin{itemize}
+    \item Contact hours: 24$\times$7 via Campuswire
+    \item Best practice: Post queries on Campuswire
+    \item Private discussion: Use DM if more time is needed
+    \item External engagement:
+    \begin{itemize}
+        \item UGRP--8 (2026)
+        \item Offline projects
+        \item Counseling / informal discussion (``Cup of tea for 10 min'')
+    \end{itemize}
+    \item Communication via official email
+\end{itemize}
+
+\subsection{Important Note}
+
+\begin{itemize}
+    \item \LaTeX{} tutorial and assignment submission guidelines will be followed
+\end{itemize}
+
+\section{Project Component (Weightage: 30\%)}
+
+\subsection{Project Kickoff}
+
+\begin{itemize}
+    \item Weightage: 30\%
+    \item Team formation deadline: 17 January 2026 (EOD)
+\end{itemize}
+
+\subsection{Project Execution Guidelines}
+
+\textbf{Milestones (M1--M6):}
+\begin{itemize}
+    \item Concept Evolution Maps
+    \item Scribe: Process \& Decision-Making
+    \item Multimodal Artifacts
+    \item Question-Driven Artifacts
+    \item Collaboration \& Team Dynamics Artifacts
+    \item Final bounds, analysis, and compiled deliverables
+\end{itemize}
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item Code
+    \item Reports
+    \item Videos (as specified)
+\end{itemize}
+
+\textbf{Assessment:}
+\begin{itemize}
+    \item Before and after mid-semester
+    \item Project viva at end of course
+\end{itemize}
+
+\subsection{Project Kickstart Flow}
+
+\begin{itemize}
+    \item \textbf{M1:} Team formation, area identification, background, motivation, problem formulation
+    \item \textbf{M2:} Mathematical modeling
+    \begin{itemize}
+        \item Random Variables (RV)
+        \item PMF / PDF
+        \item CDF
+        \item Multivariate RVs
+        \item Joint PMF / PDF / CDF
+    \end{itemize}
+    \item \textbf{M3:} Coding -- simulation and computation
+    \item \textbf{M4:} Inference using randomized algorithms
+    \item \textbf{M5:} Randomized algorithms and comparison with deterministic algorithms
+    \item \textbf{M6:} Bounds, analysis, final submission
+\end{itemize}
+
+\section{Submission Types}
+
+\subsection{Submission \#1 -- Concept Evolution Maps}
+
+\begin{itemize}
+    \item Tools: Miro, Draw.io
+\end{itemize}
+
+\subsection{Submission \#2 -- Scribe (Learning Reflection Logs)}
+
+\textbf{Types:}
+\begin{itemize}
+    \item Lecture Scribes
+    \item Project Scribes
+\end{itemize}
+
+\textbf{Key requirements:}
+\begin{itemize}
+    \item Assigned groups per lecture
+    \item 8--10 pages minimum
+    \item Reflect lecture content
+    \item Include decision logs, constraints, alternatives, trade-offs
+\end{itemize}
+
+\subsection{Submission \#3 -- Multimodal Artifacts}
+
+\begin{itemize}
+    \item Video duration: 10--15 minutes per milestone
+    \item Focus on content, not editing
+    \item Explain milestone and simulations
+\end{itemize}
+
+\section{Undergraduate Research Programme (UGRP)}
+
+\subsection{Purpose of UGRP}
+
+\begin{itemize}
+    \item T-shaped engineer model
+    \item Multidisciplinary learning
+    \item Experiential and research-driven approach
+\end{itemize}
+
+\subsection{MICxN Research Lab Overview}
+
+\begin{itemize}
+    \item Networks
+    \item IoT / IoV / IoBNT
+    \item Data Science
+    \item AI
+    \item Modern computer systems
+\end{itemize}
+
+\subsection{Research Outcomes and Collaborations}
+
+\begin{itemize}
+    \item Industry projects
+    \item International collaborations
+    \item Conference publications
+    \item Awards and recognitions
+    \item Alumni placements
+\end{itemize}
+
+\section{End of Lecture}
+
+\begin{itemize}
+    \item Open Q\&A session
+    \item Contact: dhaval.patel@ahduni.edu.in
+\end{itemize}
+
+\section*{Source}
+
+All content reproduced strictly from Lecture 3 slides (L3.pdf).
+
+\end{document}
