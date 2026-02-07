@@ -1,0 +1,195 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{CSE 400 — Lecture 7 Scribe}}\\
+\vspace{0.2em}
+Fundamentals of Probability in Computing\\
+January 27, 2025
+\end{center}
+
+\section{Cumulative Distribution Function (CDF)}
+
+\subsection{Intuition: Water Tank Analogy}
+
+A water tank analogy is used to build intuition for the cumulative distribution function.
+
+Let the height of water in the tank be denoted by $h$.
+
+The volume of water up to height $h$ is denoted by $V(h)$.
+
+The height $h$ is analogous to the value of a random variable.
+
+The volume $V(h)$ is analogous to the cumulative probability up to that value.
+
+Assume:
+\begin{itemize}[noitemsep]
+\item The tank has constant radius $R$.
+\item Cross-sectional area is $\pi R^2$.
+\end{itemize}
+
+The volume up to height $h$ is:
+\[
+V(h) = \int_{0}^{h} \pi R^2 \, dh = \pi R^2 h
+\]
+
+Key analogies stated explicitly in the lecture:
+\begin{itemize}[noitemsep]
+\item $\pi R^2$ is analogous to a probability density function (PDF) of a uniform distribution.
+\item The maximum volume of the tank is
+\[
+V(H) = \pi R^2 H
+\]
+which is analogous to total probability $=1$.
+\end{itemize}
+
+Thus:
+\begin{itemize}[noitemsep]
+\item CDF corresponds to accumulated volume.
+\item PDF corresponds to rate of accumulation.
+\end{itemize}
+
+\subsection{Definition of the CDF}
+
+\textbf{Definition.}
+Let $X$ be a random variable. The cumulative distribution function (CDF) of $X$ is defined as
+\[
+F_X(x) = \Pr(X \le x), \quad -\infty < x < \infty
+\]
+
+The lecture explicitly states that most information about the random experiment described by $X$ is determined by the behavior of $F_X(x)$.
+
+\subsection{Properties of the CDF}
+
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Bounds}
+\[
+0 \le F_X(x) \le 1
+\]
+
+\item \textbf{Limits at Infinity}
+\[
+F_X(-\infty) = 0, \qquad F_X(\infty) = 1
+\]
+
+\item \textbf{Monotonicity}
+
+For $x_1 < x_2$,
+\[
+F_X(x_1) \le F_X(x_2)
+\]
+
+\item \textbf{Interval Probability}
+
+For $x_1 < x_2$,
+\[
+\Pr(x_1 < X \le x_2) = F_X(x_2) - F_X(x_1)
+\]
+\end{enumerate}
+
+\subsection{Example 1: Validity of CDFs}
+
+\textbf{Task.} Determine whether each given function is a valid CDF.
+
+\paragraph{(a)}  
+As $x \to -\infty$, $F_X(x) \to 0$.  
+As $x \to \infty$, $F_X(x) \to 1$.  
+The function is monotonically increasing.
+
+\textbf{Conclusion:} Valid CDF.
+
+\paragraph{(b)}  
+The unit step function ensures
+\[
+F_X(x) =
+\begin{cases}
+0, & x < 0 \\
+1 - e^{-x}, & x \ge 0
+\end{cases}
+\]
+
+All bounds, monotonicity, and limits are satisfied.
+
+\textbf{Conclusion:} Valid CDF.
+
+\paragraph{(c)}
+\[
+F_X(x) = \frac{1}{\pi}\tan^{-1}(x) + \frac{1}{2}
+\]
+
+Since $\tan^{-1}(x) \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, we have $F_X(x) \in (0,1)$.
+
+As $x \to \pm\infty$, boundary conditions are violated as stated in the lecture.
+
+\textbf{Conclusion:} Not a valid CDF.
+
+\paragraph{(d)}  
+The function grows unbounded for large $x$, violating boundedness.
+
+\textbf{Conclusion:} Not a valid CDF.
+
+\subsection{Example 2: Computing Probabilities from a Given CDF}
+
+Given
+\[
+F_X(x) = (1 - e^{-x})u(x)
+\]
+
+\paragraph{(a)}
+\[
+\Pr(X > 5) = 1 - F_X(5) = e^{-5}
+\]
+
+\paragraph{(b)}
+\[
+\Pr(X < 5) = F_X(5) = 1 - e^{-5}
+\]
+
+\paragraph{(c)}
+\[
+\Pr(3 < X < 7) = F_X(7) - F_X(3)
+\]
+
+\paragraph{(d)}
+Let $A = \{X > 5\}$ and $B = \{X < 7\}$. Then
+\[
+\Pr(A \mid B) = \frac{F_X(7) - F_X(5)}{F_X(7)}
+\]
+
+\section{Probability Density Function (PDF)}
+
+\subsection{Definition via Limit}
+
+For a continuous random variable $X$, the PDF at $x$ is defined as
+\[
+f_X(x) = \lim_{\varepsilon \to 0} \frac{\Pr(x \le X < x+\varepsilon)}{\varepsilon}
+\]
+
+\subsection{Relationship Between PDF and CDF}
+
+\[
+\Pr(x \le X < x+\varepsilon) = F_X(x+\varepsilon) - F_X(x)
+\]
+
+\[
+f_X(x) = \lim_{\varepsilon \to 0} \frac{F_X(x+\varepsilon) - F_X(x)}{\varepsilon}
+= \frac{dF_X(x)}{dx}
+\]
+
+\subsection{Fundamental Relationship}
+
+The PDF of a random variable is the derivative of its CDF.  
+The CDF is the integral of its PDF.
+
+\section{Expectation of Random Variables}
+
+The lecture outline lists this section, but no definitions, derivations, or examples are present in the provided slides.
+
+\end{document}
