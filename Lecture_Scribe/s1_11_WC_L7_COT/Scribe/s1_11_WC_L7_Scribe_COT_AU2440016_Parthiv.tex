@@ -1,0 +1,580 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{Name: Parthiv Karangiya}}
+\rhead{\textbf{Roll No.: AU2440016}}
+\cfoot{\thepage}
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{CSE400: Fundamentals of Probability in Computing}}\\[4pt]
+    {\Large \textbf{Lecture 7: Expectation, CDFs, PDFs and Problem Solving}}\\[6pt]
+    {\large Dhaval Patel, PhD (Associate Professor)}\\
+    {\large SEAS - Ahmedabad University}\\
+    {\large January 27, 2025}\\[10pt]
+    \hrule
+\end{center}
+
+\vspace{10pt}
+
+\section{Lecture Outline (As Given in Slides)}
+
+This lecture covers the following major topics:
+
+\begin{itemize}
+    \item The Cumulative Density Function (CDF)
+    \begin{itemize}
+        \item Definition
+        \item Properties
+        \item Example
+    \end{itemize}
+    \item The Probability Density Function (PDF)
+    \begin{itemize}
+        \item Definition
+        \item Properties
+        \item Example
+    \end{itemize}
+    \item Expectation of Random Variables (RVs)
+    \begin{itemize}
+        \item Definition and Example
+        \item Expectation of a Function of RV
+        \item Linear Operation with Expectation
+    \end{itemize}
+    \item $n^{th}$ Moments and Central Moments of RVs
+    \begin{itemize}
+        \item Variance
+        \item Skewness
+        \item Kurtosis
+    \end{itemize}
+\end{itemize}
+
+\section{CDF and PDF: Intuition (Water Tank Analogy)}
+
+The lecture begins with an intuitive explanation using a \textbf{water tank analogy}.
+
+\subsection{CDF Interpretation}
+
+The Cumulative Distribution Function (CDF) can be intuitively understood as follows:
+
+\begin{itemize}
+    \item Consider a cylindrical water tank of height $H$.
+    \item Let $h$ be the current height of water inside the tank.
+    \item The height $h$ represents the value of a random variable.
+    \item The volume of water up to height $h$, denoted $V(h)$, corresponds to the cumulative probability up to that value.
+\end{itemize}
+
+Thus, the CDF represents the accumulated probability up to a given point.
+
+\subsection{PDF Interpretation}
+
+The cross-sectional area of the tank is $\pi R^2$. This is analogous to the \textbf{Probability Density Function (PDF)}.
+
+The volume up to height $h$ is:
+
+\[
+V(h) = \int_0^h \pi R^2 \, dh = (\pi R^2)h
+\]
+
+Also, the maximum volume of the tank is:
+
+\[
+V(H) = \pi R^2 H
+\]
+
+This maximum volume is analogous to total probability $=1$.
+
+\section{Cumulative Distribution Function (CDF)}
+
+\subsection{Definition of CDF}
+
+\textbf{Definition:} The CDF of a random variable $X$ is defined as:
+
+\[
+F_X(x) = \Pr(X \leq x), \quad -\infty < x < \infty
+\]
+
+The slides mention that:
+
+\begin{quote}
+Most of the information about the random experiment described by the RV $X$ is determined by the behavior of $F_X(x)$.
+\end{quote}
+
+\subsection{Properties of CDF}
+
+The lecture lists the following key properties of a valid CDF:
+
+\subsubsection*{Property 1: Range of CDF}
+
+\[
+0 \leq F_X(x) \leq 1
+\]
+
+\subsubsection*{Property 2: Limits at Infinity}
+
+\[
+F_X(-\infty) = 0, \quad F_X(\infty) = 1
+\]
+
+\subsubsection*{Property 3: Monotonicity (Non-Decreasing)}
+
+For $x_1 < x_2$,
+
+\[
+F_X(x_1) \leq F_X(x_2)
+\]
+
+Thus, CDF is always non-decreasing.
+
+\subsubsection*{Property 4: Probability Between Two Points}
+
+For $x_1 < x_2$,
+
+\[
+\Pr(x_1 < X \leq x_2) = F_X(x_2) - F_X(x_1)
+\]
+
+This is a key property used heavily in probability problem solving.
+
+\section{Example: Validity of CDF (Example \#1)}
+
+The lecture provides multiple candidate functions and asks which ones are valid CDFs.
+
+\subsection{Candidate 1}
+
+\[
+F_X(x) = \frac{1}{2} + \frac{1}{\pi}\tan^{-1}(x)
+\]
+
+This was marked as a \textbf{valid CDF}.
+
+Reasoning based on properties:
+\begin{itemize}
+    \item $\tan^{-1}(x)$ is increasing.
+    \item As $x \to -\infty$, $\tan^{-1}(x)\to -\frac{\pi}{2}$:
+    \[
+    F_X(-\infty)=\frac{1}{2}+\frac{1}{\pi}\left(-\frac{\pi}{2}\right)=0
+    \]
+    \item As $x \to \infty$, $\tan^{-1}(x)\to \frac{\pi}{2}$:
+    \[
+    F_X(\infty)=\frac{1}{2}+\frac{1}{\pi}\left(\frac{\pi}{2}\right)=1
+    \]
+\end{itemize}
+
+Hence it satisfies all CDF conditions.
+
+\subsection{Candidate 2}
+
+\[
+F_X(x) = (1-e^{-x})u(x)
+\]
+
+This was also marked as a \textbf{valid CDF}.
+
+Here $u(x)$ is the unit step function, meaning:
+
+\[
+u(x)=
+\begin{cases}
+0, & x<0\\
+1, & x\ge 0
+\end{cases}
+\]
+
+So:
+
+\[
+F_X(x)=
+\begin{cases}
+0, & x<0\\
+1-e^{-x}, & x\ge 0
+\end{cases}
+\]
+
+This is non-decreasing and approaches 1 as $x\to\infty$.
+
+\subsection{Candidate 3}
+
+\[
+F_X(x)=e^{-x^2}
+\]
+
+This was marked as \textbf{not valid}.
+
+Reason:
+\begin{itemize}
+    \item As $x\to\infty$, $e^{-x^2}\to 0$, but a CDF must approach 1.
+\end{itemize}
+
+Hence invalid.
+
+\subsection{Candidate 4}
+
+\[
+F_X(x)=x^2 u(x)
+\]
+
+This was marked as \textbf{not valid}.
+
+Reason:
+\begin{itemize}
+    \item For large $x$, $x^2$ becomes greater than 1, so $F_X(x)$ violates the condition $F_X(x)\le 1$.
+\end{itemize}
+
+Hence invalid.
+
+\section{Example: Solving Probability Using CDF (Example \#2)}
+
+Suppose a random variable has CDF:
+
+\[
+F_X(x) = (1-e^{-x})u(x)
+\]
+
+We are asked to compute several probability values.
+
+\subsection{1. Compute $\Pr(X>5)$}
+
+Using complement rule:
+
+\[
+\Pr(X>5)=1-\Pr(X\le 5)
+\]
+
+But:
+
+\[
+\Pr(X\le 5)=F_X(5)
+\]
+
+Since $5>0$, $u(5)=1$, so:
+
+\[
+F_X(5)=1-e^{-5}
+\]
+
+Thus:
+
+\[
+\Pr(X>5)=1-(1-e^{-5})=e^{-5}
+\]
+
+\[
+\boxed{\Pr(X>5)=e^{-5}}
+\]
+
+\subsection{2. Compute $\Pr(X<5)$}
+
+From the CDF definition:
+
+\[
+\Pr(X<5)=F_X(5)
+\]
+
+Since $5>0$:
+
+\[
+F_X(5)=1-e^{-5}
+\]
+
+Thus:
+
+\[
+\boxed{\Pr(X<5)=1-e^{-5}}
+\]
+
+\subsection{3. Compute $\Pr(3<X<7)$}
+
+Using the CDF property:
+
+\[
+\Pr(3<X<7)=F_X(7)-F_X(3)
+\]
+
+Compute each:
+
+Since $7>0$:
+
+\[
+F_X(7)=1-e^{-7}
+\]
+
+Since $3>0$:
+
+\[
+F_X(3)=1-e^{-3}
+\]
+
+Therefore:
+
+\[
+\Pr(3<X<7)=(1-e^{-7})-(1-e^{-3})
+\]
+
+\[
+=1-e^{-7}-1+e^{-3}
+\]
+
+\[
+=e^{-3}-e^{-7}
+\]
+
+\[
+\boxed{\Pr(3<X<7)=e^{-3}-e^{-7}}
+\]
+
+\subsection{4. Compute $\Pr(X>5 \mid X<7)$}
+
+This is a conditional probability:
+
+Let
+\[
+A=\{X>5\}, \quad B=\{X<7\}
+\]
+
+Then:
+
+\[
+\Pr(A\mid B)=\frac{\Pr(A\cap B)}{\Pr(B)}
+\]
+
+Now:
+
+\[
+A\cap B = \{5<X<7\}
+\]
+
+So:
+
+\[
+\Pr(5<X<7)=F_X(7)-F_X(5)
+\]
+
+We already know:
+
+\[
+F_X(7)=1-e^{-7}, \quad F_X(5)=1-e^{-5}
+\]
+
+Thus:
+
+\[
+\Pr(5<X<7)=(1-e^{-7})-(1-e^{-5})
+\]
+
+\[
+= e^{-5}-e^{-7}
+\]
+
+Now:
+
+\[
+\Pr(B)=\Pr(X<7)=F_X(7)=1-e^{-7}
+\]
+
+Thus:
+
+\[
+\Pr(X>5\mid X<7)=\frac{e^{-5}-e^{-7}}{1-e^{-7}}
+\]
+
+\[
+\boxed{\Pr(X>5\mid X<7)=\frac{e^{-5}-e^{-7}}{1-e^{-7}}}
+\]
+
+\section{Probability Density Function (PDF)}
+
+\subsection{Definition of PDF (Continuous RV)}
+
+The lecture defines the PDF of random variable $X$ evaluated at point $x$ as:
+
+\[
+f_X(x)=\lim_{\epsilon\to 0}\frac{\Pr(x<X<x+\epsilon)}{\epsilon}
+\]
+
+This definition is based on a continuous random variable assumption.
+
+\subsection{PDF-CDF Relationship Derivation}
+
+For a continuous range, recall:
+
+\[
+\Pr(x<X<x+\epsilon)=F_X(x+\epsilon)-F_X(x)
+\]
+
+Substituting into the PDF definition:
+
+\[
+f_X(x)=\lim_{\epsilon\to 0}\frac{F_X(x+\epsilon)-F_X(x)}{\epsilon}
+\]
+
+But this is exactly the definition of derivative:
+
+\[
+f_X(x)=\frac{dF_X(x)}{dx}
+\]
+
+Thus:
+
+\[
+\boxed{f_X(x)=\frac{d}{dx}F_X(x)}
+\]
+
+\subsection{Integral Relationship (Inverse Relation)}
+
+The lecture also states:
+
+\begin{quote}
+Hence, it is seen that the PDF of a random variable is the derivative of its CDF. Conversely, the CDF of a random variable can be expressed as the integral of its PDF.
+\end{quote}
+
+Therefore:
+
+\[
+F_X(x)=\int_{-\infty}^{x} f_X(t)\,dt
+\]
+
+\[
+\boxed{F_X(x)=\int_{-\infty}^{x} f_X(t)\,dt}
+\]
+
+\section{Expectation of Random Variables}
+
+The outline indicates that the lecture continues into Expectation of RVs. 
+This includes:
+
+\begin{itemize}
+    \item Definition and Example
+    \item Expectation of a Function of RV
+    \item Linear Operation with Expectation
+\end{itemize}
+
+However, the provided extracted lecture slide pages in the uploaded material clearly show only the section headers for Expectation without visible full formulas in the extracted text portion.
+
+Thus, only the explicitly visible content is recorded here.
+
+\subsection{Expectation of RVs (Section Heading)}
+
+The lecture includes a section titled:
+
+\begin{center}
+\textbf{Expectation of RVs:}
+\end{center}
+
+This topic is introduced after PDF-CDF relationship.
+
+\section{Moments and Central Moments}
+
+The lecture outline indicates that the lecture covers:
+
+\begin{itemize}
+    \item $n^{th}$ moments
+    \item Central moments
+    \item Variance
+    \item Skewness
+    \item Kurtosis
+\end{itemize}
+
+However, the explicit mathematical definitions for these were not fully visible in the extracted pages provided in the loaded slide output text. Therefore, no extra definitions are introduced here to preserve strict fidelity.
+
+\section{Key Exam Formula Sheet (From This Lecture)}
+
+This section compiles only formulas explicitly given in the slides.
+
+\subsection{CDF Definition}
+
+\[
+F_X(x)=\Pr(X\le x)
+\]
+
+\subsection{CDF Properties}
+
+\[
+0\le F_X(x)\le 1
+\]
+
+\[
+F_X(-\infty)=0,\quad F_X(\infty)=1
+\]
+
+For $x_1<x_2$:
+
+\[
+F_X(x_1)\le F_X(x_2)
+\]
+
+\[
+\Pr(x_1<X\le x_2)=F_X(x_2)-F_X(x_1)
+\]
+
+\subsection{PDF Definition}
+
+\[
+f_X(x)=\lim_{\epsilon\to 0}\frac{\Pr(x<X<x+\epsilon)}{\epsilon}
+\]
+
+\subsection{CDF-PDF Relationship}
+
+\[
+f_X(x)=\frac{dF_X(x)}{dx}
+\]
+
+\[
+F_X(x)=\int_{-\infty}^{x} f_X(t)\,dt
+\]
+
+\section{Solved Results from Examples (Quick Revision)}
+
+\subsection{Example 1 Validity}
+
+\begin{itemize}
+    \item $\frac{1}{2}+\frac{1}{\pi}\tan^{-1}(x)$ is a valid CDF.
+    \item $(1-e^{-x})u(x)$ is a valid CDF.
+    \item $e^{-x^2}$ is not a valid CDF.
+    \item $x^2u(x)$ is not a valid CDF.
+\end{itemize}
+
+\subsection{Example 2 Results}
+
+Given:
+
+\[
+F_X(x)=(1-e^{-x})u(x)
+\]
+
+\[
+\Pr(X>5)=e^{-5}
+\]
+
+\[
+\Pr(X<5)=1-e^{-5}
+\]
+
+\[
+\Pr(3<X<7)=e^{-3}-e^{-7}
+\]
+
+\[
+\Pr(X>5\mid X<7)=\frac{e^{-5}-e^{-7}}{1-e^{-7}}
+\]
+
+\section{End of Lecture Notes}
+
+This document strictly reconstructs the content shown in the provided lecture slides for CSE400 Lecture 7.
+
+\end{document}

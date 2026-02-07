@@ -1,0 +1,670 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{\textbf{CSE400: Fundamentals of Probability in Computing}\\
+\large Lecture 2 Scribe (Homework Assignment--1)\\
+\small Exam Preparation Notes}
+\author{Dhaval Patel, PhD (Lecture Content)\\Scribed for Revision}
+\date{January 8, 2026}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{} % clear default header/footer
+
+\fancyhead[L]{Name: Parthiv Karangiya}
+\fancyhead[R]{Roll No.: AU2440016}
+
+\renewcommand{\headrulewidth}{0.4pt} % header line
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyfoot[C]{\thepage} % page number in footer center
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Lecture Overview and Outline}
+
+This lecture (CSE400 Lecture 2) focuses on:
+\begin{itemize}
+    \item Applied probability (continuation from Lecture 1).
+    \item Formula revision:
+    \begin{itemize}
+        \item Basic probability rules
+        \item Factorials and counting
+        \item Combinations
+        \item A key combinatorial identity
+    \end{itemize}
+    \item Problem solving: interactive walkthrough of 10 selected questions from Homework Assignment--1.
+    \item Logistics and submission details (LaTeX + Gradescope workflow).
+\end{itemize}
+
+The lecture explicitly solves Questions:
+\[
+1,2,3,4,5,6,7,9,10,15.
+\]
+
+\section{Formula Revision}
+
+\subsection{Factorials and Counting}
+
+\subsubsection{Factorial Definition}
+
+For a positive integer $n$,
+\begin{equation}
+n! = n(n-1)(n-2)\cdots 1.
+\end{equation}
+
+\subsubsection{Combination Formula}
+
+The binomial coefficient is defined as:
+\begin{equation}
+\binom{n}{r} = \frac{n!}{r!(n-r)!}.
+\end{equation}
+
+\subsection{Combinatorial Identity}
+
+A combinatorial identity given in the lecture is:
+\begin{equation}
+\binom{n+m}{r} = \sum_{k=0}^{r} \binom{n}{k}\binom{m}{r-k}.
+\end{equation}
+
+This identity will later be proved in Question 6 using a counting argument.
+
+\subsection{Basic Probability Formulas}
+
+\subsubsection{Complement Rule}
+
+For any event $A$,
+\begin{equation}
+P(A^c) = 1 - P(A).
+\end{equation}
+
+\subsubsection{Union Rule (Inclusion--Exclusion for Two Events)}
+
+For events $A$ and $B$,
+\begin{equation}
+P(A \cup B) = P(A) + P(B) - P(A \cap B).
+\end{equation}
+
+\subsubsection{Conditional Probability}
+
+For events $A$ and $B$ with $P(B)>0$,
+\begin{equation}
+P(A\mid B) = \frac{P(A\cap B)}{P(B)}.
+\end{equation}
+
+\subsubsection{Classical Probability Formula}
+
+\begin{equation}
+P(\text{Event}) = \frac{\text{Favorable outcomes}}{\text{Total outcomes}}.
+\end{equation}
+
+\subsection{Binomial Distribution}
+
+The lecture provides the binomial tail probability:
+\begin{equation}
+P(X \ge r) = \sum_{k=r}^{n} \binom{n}{k} p^k (1-p)^{n-k}.
+\end{equation}
+
+\subsection{Law of Total Probability}
+
+If $\{B_i\}$ is a partition of the sample space, then:
+\begin{equation}
+P(A) = \sum_i P(A\mid B_i)P(B_i).
+\end{equation}
+
+\subsection{Bayes' Theorem}
+
+Bayes' theorem is stated as:
+\begin{equation}
+P(A\mid B) = \frac{P(B\mid A)P(A)}{P(B)}.
+\end{equation}
+
+\newpage
+
+\section{Problem Solving: Homework Assignment--1 (Selected Questions)}
+
+\subsection{Question 1}
+
+\subsubsection{Problem Statement}
+
+A total of $28\%$ of American males smoke cigarettes, $7\%$ smoke cigars, and $5\%$ smoke both cigars and cigarettes.
+\begin{enumerate}[label=(\alph*)]
+    \item What percentage of males smokes neither cigars nor cigarettes?
+    \item What percentage smokes cigars but not cigarettes?
+\end{enumerate}
+
+\subsubsection{Solution}
+
+Let:
+\[
+S_1 = \{\text{male smokes cigarettes}\}, \qquad S_2 = \{\text{male smokes cigars}\}.
+\]
+
+Given:
+\[
+P(S_1)=0.28,\qquad P(S_2)=0.07,\qquad P(S_1\cap S_2)=0.05.
+\]
+
+We are asked:
+\begin{enumerate}[label=(\alph*)]
+    \item $P(\text{neither})$
+    \item $P(\text{cigars but not cigarettes})$
+\end{enumerate}
+
+\paragraph{Step 1: Probability of at least one (inclusion--exclusion).}
+
+\begin{align}
+P(S_1\cup S_2)
+&= P(S_1) + P(S_2) - P(S_1\cap S_2) \\
+&= 0.28 + 0.07 - 0.05 \\
+&= 0.30.
+\end{align}
+
+\paragraph{(a) Probability of neither (complement).}
+
+\begin{align}
+P(\text{neither})
+&= 1 - P(S_1\cup S_2) \\
+&= 1 - 0.30 \\
+&= 0.70.
+\end{align}
+
+\paragraph{(b) Probability of cigars but not cigarettes.}
+
+\begin{align}
+P(S_2\setminus S_1)
+&= P(S_2) - P(S_1\cap S_2) \\
+&= 0.07 - 0.05 \\
+&= 0.02.
+\end{align}
+
+\subsection{Question 2}
+
+\subsubsection{Problem Statement}
+
+In how many ways can 8 people be seated in a row if:
+\begin{enumerate}[label=(\alph*)]
+    \item there are no restrictions on the seating arrangement?
+    \item persons A and B must sit next to each other?
+    \item there are 4 men and 4 women and no 2 men or 2 women can sit next to each other?
+    \item there are 5 men and they must sit next to one another?
+    \item there are 4 married couples and each couple must sit together?
+\end{enumerate}
+
+\subsubsection{Solution}
+
+\paragraph{(a) No restriction.}
+
+All permutations of 8 distinct people:
+\begin{equation}
+8! = 40320.
+\end{equation}
+
+\paragraph{(b) A and B must sit together.}
+
+Treat $AB$ as one block, so we have 7 objects to arrange.
+Within the block, A and B can swap positions.
+
+\begin{equation}
+7! \times 2! = 10080.
+\end{equation}
+
+\paragraph{(c) 4 men and 4 women alternating.}
+
+There are two valid gender patterns:
+\begin{itemize}
+    \item start with man (M W M W M W M W)
+    \item start with woman (W M W M W M W M)
+\end{itemize}
+
+For each pattern, arrange men in $4!$ ways and women in $4!$ ways.
+
+\begin{equation}
+2 \times (4!\times 4!) = 1152.
+\end{equation}
+
+\paragraph{(d) 5 men sit together.}
+
+Treat the 5 men as one block. Along with the 3 women, there are $4$ objects to arrange.
+Inside the men block, men can be permuted in $5!$ ways.
+
+\begin{equation}
+4! \times 5! = 2880.
+\end{equation}
+
+\paragraph{(e) 4 married couples sit together.}
+
+Treat each couple as one unit. Then there are $4$ units to arrange: $4!$ ways.
+Within each couple, there are $2$ internal arrangements.
+
+\begin{equation}
+4! \times 2^4 = 384.
+\end{equation}
+
+\subsection{Question 3}
+
+\subsubsection{Problem Statement}
+
+A class in probability theory consists of 6 men and 4 women. An examination is given and
+the students are ranked according to their performance. Assume that no two students obtain the same score.
+\begin{enumerate}[label=(\alph*)]
+    \item How many different rankings are possible?
+    \item If the men are ranked among themselves and the women among themselves, how many different rankings are possible?
+\end{enumerate}
+
+\subsubsection{Solution}
+
+\paragraph{(a) Total rankings.}
+
+There are $10$ students total, and a ranking is a permutation.
+
+\begin{equation}
+10! = 3,628,800.
+\end{equation}
+
+\paragraph{(b) Rankings within genders.}
+
+Permute the 6 men among themselves and the 4 women among themselves.
+
+\begin{equation}
+6!\times 4! = 17,280.
+\end{equation}
+
+\noindent Note (as stated in lecture): This counts arrangements that differ only by permuting people of the same gender.
+
+\subsection{Question 4}
+
+\subsubsection{Problem Statement}
+
+A committee of 5 is to be selected from a group of 6 men and 9 women. If the selection
+is made randomly, what is the probability that the committee consists of 3 men and 2 women?
+
+\subsubsection{Solution}
+
+\paragraph{Step 1: Count total possible committees.}
+
+Total people:
+\[
+6+9 = 15.
+\]
+
+Total ways to choose 5 from 15:
+\begin{equation}
+\binom{15}{5} = 3003.
+\end{equation}
+
+\paragraph{Step 2: Count favorable committees.}
+
+Choose 3 men from 6 and 2 women from 9:
+\begin{align}
+\binom{6}{3}\binom{9}{2}
+&= 20\times 36 \\
+&= 720.
+\end{align}
+
+\paragraph{Step 3: Compute probability.}
+
+\begin{align}
+P
+&= \frac{720}{3003} \\
+&= \frac{240}{1001} \\
+&\approx 0.23976.
+\end{align}
+
+\subsection{Question 5}
+
+\subsubsection{Problem Statement}
+
+In order to play a game of basketball, 10 children at a playground divide themselves into
+two teams of 5 each. How many different divisions are possible?
+
+\subsubsection{Solution}
+
+We divide 10 children into two equal teams of 5.
+
+\paragraph{Step 1: Choose 5 children for the first team.}
+
+\begin{equation}
+\binom{10}{5} = 252.
+\end{equation}
+
+\paragraph{Step 2: Correct for unlabeled teams.}
+
+Teams are unlabeled, meaning swapping teams does not create a new division.
+Hence each division is counted twice.
+
+\begin{equation}
+\frac{252}{2} = 126.
+\end{equation}
+
+Therefore, there are:
+\[
+126
+\]
+distinct unlabeled splits.
+
+\subsection{Question 6}
+
+\subsubsection{Problem Statement}
+
+Prove that:
+\begin{equation}
+\binom{n+m}{r}
+=
+\binom{n}{0}\binom{m}{r}
++
+\binom{n}{1}\binom{m}{r-1}
++
+\cdots
++
+\binom{n}{r}\binom{m}{0}.
+\end{equation}
+
+Hint: Consider selecting a group of size $r$ from $n$ men and $m$ women.
+
+\subsubsection{Solution}
+
+This is Vandermonde's identity:
+\begin{equation}
+\binom{n+m}{r} = \sum_{k=0}^{r}\binom{n}{k}\binom{m}{r-k}.
+\end{equation}
+
+\paragraph{Combinatorial proof (as in lecture).}
+
+Suppose we want to choose $r$ items from two groups:
+\begin{itemize}
+    \item first group has size $n$
+    \item second group has size $m$
+\end{itemize}
+
+If exactly $k$ items are chosen from the first group, then:
+\[
+r-k
+\]
+must be chosen from the second group.
+
+\paragraph{Step 1: Count selections with exactly $k$ from first group.}
+
+Number of ways:
+\begin{equation}
+\binom{n}{k}\binom{m}{r-k}.
+\end{equation}
+
+\paragraph{Step 2: Sum over all valid $k$.}
+
+Summing for $k=0$ to $r$ counts all possible ways to choose $r$ objects from the combined $n+m$ objects:
+\begin{equation}
+\binom{n+m}{r} = \sum_{k=0}^{r}\binom{n}{k}\binom{m}{r-k}.
+\end{equation}
+
+Thus the identity is proved.
+
+\subsection{Question 7}
+
+\subsubsection{Problem Statement}
+
+Suppose that 10 fish are caught at a lake that contains 5 distinct types of fish.
+\begin{enumerate}[label=(\alph*)]
+    \item How many different outcomes are possible, where an outcome specifies the numbers of caught fish of each of the 5 types?
+    \item How many outcomes are possible when 3 of the 10 fish caught are trout?
+    \item How many when at least 2 of the 10 are trout?
+\end{enumerate}
+
+\subsubsection{Solution}
+
+Let:
+\[
+x_1+x_2+x_3+x_4+x_5 = 10,
+\]
+where each $x_i$ is the number of fish caught of type $i$.
+
+\paragraph{(a) Total number of outcomes.}
+
+This is the number of non-negative integer solutions to the equation above.
+
+Using stars-and-bars:
+\begin{align}
+\text{Number of solutions}
+&= \binom{10+5-1}{5-1} \\
+&= \binom{14}{4} \\
+&= 1001.
+\end{align}
+
+\paragraph{(b) Exactly 3 trout.}
+
+Fix the trout variable to be 3. Then the remaining fish count is:
+\[
+10-3 = 7
+\]
+distributed among the remaining 4 types.
+
+So:
+\[
+x_1+x_2+x_3+x_4 = 7.
+\]
+
+Number of non-negative solutions:
+\begin{align}
+\binom{7+4-1}{4-1}
+&= \binom{10}{3} \\
+&= 120.
+\end{align}
+
+\paragraph{(c) At least 2 trout.}
+
+The lecture gives the computation as:
+\begin{equation}
+\text{At least 2} = 1001 - (286+220) = 495.
+\end{equation}
+
+Thus, the number of outcomes with at least 2 trout is:
+\[
+495.
+\]
+
+\subsection{Question 9}
+
+\subsubsection{Problem Statement}
+
+A board has 16 squares (arranged in a $4\times 4$ grid). Out of these 16 squares, two squares are chosen at random.
+What is the probability that they have no side in common?
+
+\subsubsection{Solution}
+
+We pick a pair of distinct squares uniformly at random.
+
+\paragraph{Step 1: Count total unordered pairs.}
+
+\begin{equation}
+\binom{16}{2} = 120.
+\end{equation}
+
+\paragraph{Step 2: Count pairs that share a side (adjacent).}
+
+Horizontal adjacency:
+\begin{itemize}
+    \item Each row has 3 horizontal adjacent pairs.
+    \item There are 4 rows.
+\end{itemize}
+
+So horizontal adjacent pairs:
+\[
+3\times 4 = 12.
+\]
+
+Vertical adjacency:
+\begin{itemize}
+    \item Each column has 3 vertical adjacent pairs.
+    \item There are 4 columns.
+\end{itemize}
+
+So vertical adjacent pairs:
+\[
+3\times 4 = 12.
+\]
+
+Total adjacent pairs:
+\[
+12+12 = 24.
+\]
+
+\paragraph{Step 3: Compute probability of no common side.}
+
+\begin{align}
+P
+&= 1 - \frac{24}{120} \\
+&= 1 - \frac{1}{5} \\
+&= \frac{4}{5}.
+\end{align}
+
+\subsection{Question 10}
+
+\subsubsection{Problem Statement}
+
+A multiple choice examination has 5 questions. Each question has three alternative answers, of which exactly one is correct.
+The probability that a student will get 4 or more correct answers just by guessing is:
+
+\subsubsection{Solution}
+
+Let:
+\[
+X \sim \text{Bin}(n=5, p=\tfrac{1}{3}).
+\]
+
+We need:
+\[
+P(X\ge 4).
+\]
+
+\paragraph{Step 1: Expand into two cases.}
+
+\[
+P(X\ge 4) = P(X=4) + P(X=5).
+\]
+
+\paragraph{Step 2: Compute $P(X=4)$.}
+
+\begin{equation}
+P(X=4) = \binom{5}{4}\left(\frac{1}{3}\right)^4\left(\frac{2}{3}\right).
+\end{equation}
+
+\paragraph{Step 3: Compute $P(X=5)$.}
+
+\begin{equation}
+P(X=5) = \binom{5}{5}\left(\frac{1}{3}\right)^5.
+\end{equation}
+
+\paragraph{Step 4: Add the two terms.}
+
+\begin{align}
+P(X\ge 4)
+&= \binom{5}{4}\left(\frac{1}{3}\right)^4\left(\frac{2}{3}\right)
++
+\left(\frac{1}{3}\right)^5 \\
+&= \frac{11}{243}.
+\end{align}
+
+\subsection{Question 15}
+
+\subsubsection{Problem Statement}
+
+A student appears for a quiz consisting of only true--false type questions. The student knows the answers of some questions and guesses the answers for the remaining questions.
+
+Whenever the student knows the answer, he gives the correct answer.
+
+The probability of the student giving the correct answer, given that he has guessed it, is $\frac{1}{2}$.
+
+The probability of the answer being guessed, given that the student's answer is correct, is $\frac{1}{6}$.
+
+Then the probability that the student knows the answer of a randomly chosen question is:
+
+\subsubsection{Solution}
+
+Define events:
+\[
+K = \{\text{student knows the answer}\}, \qquad
+G = \{\text{student guesses the answer}\}, \qquad
+C = \{\text{student answers correctly}\}.
+\]
+
+Given:
+\[
+P(C\mid K)=1, \qquad P(C\mid G)=\frac{1}{2}, \qquad P(G\mid C)=\frac{1}{6}.
+\]
+
+Let:
+\[
+P(K)=x \quad \Rightarrow \quad P(G)=1-x.
+\]
+
+\paragraph{Step 1: Compute $P(C)$.}
+
+\begin{align}
+P(C)
+&= P(C\mid K)P(K) + P(C\mid G)P(G) \\
+&= (1)(x) + \left(\frac{1}{2}\right)(1-x) \\
+&= x + \frac{1}{2}(1-x) \\
+&= \frac{1}{2}(1+x).
+\end{align}
+
+\paragraph{Step 2: Apply Bayes' Theorem.}
+
+\begin{align}
+P(G\mid C)
+&= \frac{P(C\mid G)P(G)}{P(C)} \\
+&= \frac{\left(\frac{1}{2}\right)(1-x)}{\left(\frac{1}{2}\right)(1+x)} \\
+&= \frac{1-x}{1+x}.
+\end{align}
+
+But we are given:
+\[
+P(G\mid C)=\frac{1}{6}.
+\]
+
+Thus:
+\begin{align}
+\frac{1}{6}
+&= \frac{1-x}{1+x}.
+\end{align}
+
+\paragraph{Step 3: Solve for $x$.}
+
+\begin{align}
+1+x &= 6(1-x) \\
+1+x &= 6 - 6x \\
+7x &= 5 \\
+x &= \frac{5}{7}.
+\end{align}
+
+Therefore,
+\[
+P(K) = \frac{5}{7}.
+\]
+
+\newpage
+
+\section{Lecture Closing: Next Steps and Submission Instructions}
+
+The lecture concludes with the following statement:
+
+\begin{itemize}
+    \item In-class discussion finished: Questions 1, 2, 3, 4, 5, 6, 7, 9, 10, and 15 have been covered.
+    \item Student task: Complete solutions for Q8, Q11, Q12, Q13, and Q14.
+    \item Scribe all 15 solutions into the provided LaTeX template.
+    \item Submission: Upload PDF to Gradescope by Jan 10, 11:59 PM.
+\end{itemize}
+
+\section{End of Lecture Scribe}
+
+This document reproduces exactly the formulas, solution steps, and derivations presented in the lecture slides, in the same order and structure as shown.
+
+\end{document}
