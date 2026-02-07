@@ -1,0 +1,266 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor} 
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture 7 Scribe}
+\cfoot{\thepage}
+
+\title{\textbf{CSE400 -- Fundamentals of Probability in Computing}\\
+\large Lecture 7: Expectation, CDFs, PDFs and Problem Solving}
+\author{\textbf{Name:} Maitri Lad   \textbf{Enrollnment no.:} AU2440146}
+\date{January 27, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Outline of the Lecture}
+
+The lecture covers the following topics in order:
+\begin{itemize}
+    \item The Cumulative Distribution Function (CDF)
+    \begin{itemize}
+        \item Definition
+        \item Properties
+        \item Examples
+    \end{itemize}
+    \item The Probability Density Function (PDF)
+    \begin{itemize}
+        \item Definition
+        \item PDF--CDF relationship
+    \end{itemize}
+    \item Expectation of random variables
+    \begin{itemize}
+        \item Definition and example
+        \item Expectation of a function of a random variable
+        \item Linear operations with expectation
+    \end{itemize}
+    \item $n^{\text{th}}$ moments and central moments of random variables
+    \begin{itemize}
+        \item Variance
+        \item Skewness
+        \item Kurtosis
+    \end{itemize}
+\end{itemize}
+
+\section{CDF and PDF: Water Tank Analogy}
+
+A water tank analogy is used to motivate the idea of CDF and PDF.
+
+\begin{itemize}
+    \item The height $h$ of water corresponds to the value of a random variable.
+    \item The volume of water up to height $h$ corresponds to the cumulative probability.
+\end{itemize}
+
+Let
+\begin{itemize}
+    \item Tank radius $= R$
+    \item Maximum height $= H$
+\end{itemize}
+
+The volume up to height $h$ is
+\[
+V(h)=\int_{0}^{h}\pi R^{2}\,dh=(\pi R^{2})h.
+\]
+
+Here, $\pi R^{2}$ is analogous to the PDF of a uniform distribution.
+
+The total volume is
+\[
+V(H)=\pi R^{2}H,
+\]
+which is analogous to total probability $=1$.
+
+\section{Cumulative Distribution Function (CDF)}
+
+\subsection{Definition}
+
+For a random variable $X$, the cumulative distribution function is defined as
+\[
+F_X(x)=\Pr(X\le x),\qquad -\infty<x<\infty.
+\]
+
+\subsection{Interpretation}
+
+Most of the information about the random experiment described by $X$ is determined by the behavior of $F_X(x)$.
+
+\subsection{Properties of the CDF}
+
+\begin{itemize}
+    \item \textbf{Bounds}
+    \[
+    0\le F_X(x)\le 1
+    \]
+    \item \textbf{Limits}
+    \[
+    F_X(-\infty)=0,\qquad F_X(\infty)=1
+    \]
+    \item \textbf{Monotonicity}
+
+    For $x_1<x_2$,
+    \[
+    F_X(x_1)\le F_X(x_2)
+    \]
+    \item \textbf{Probability over an interval}
+
+    For $x_1<x_2$,
+    \[
+    \Pr(x_1<X\le x_2)=F_X(x_2)-F_X(x_1).
+    \]
+\end{itemize}
+
+\section{CDF -- Examples}
+
+\subsection{Example 1: Validity of Given Functions}
+
+Determine whether the following are valid CDFs.
+
+\[
+F_X(x)=\frac{1}{2}+\frac{1}{\pi}\tan^{-1}(x) \qquad \text{(Valid CDF)}
+\]
+
+\[
+F_X(x)=[1-e^{-x}]\,u(x) \qquad \text{(Valid CDF)}
+\]
+
+\[
+F_X(x)=e^{-x^{2}} \qquad \text{(Not a valid CDF)}
+\]
+
+\[
+F_X(x)=x^{2}u(x) \qquad \text{(Not a valid CDF)}
+\]
+
+Here, $u(x)$ denotes the unit step function.
+
+\subsection{Example 2: Probability Computation Using a Given CDF}
+
+Given
+\[
+F_X(x)=(1-e^{-x})u(x),
+\]
+
+\begin{align*}
+\Pr(X>5)
+&=1-\Pr(X\le5)\\
+&=1-F_X(5)=e^{-5}.
+\end{align*}
+
+\[
+\Pr(X<5)=F_X(5).
+\]
+
+\[
+\Pr(3<X<7)=F_X(7)-F_X(3).
+\]
+
+\subsection{Conditional Probability}
+
+\[
+\Pr(X>5\,|\,X<7)
+=\frac{\Pr(5<X<7)}{\Pr(X<7)}
+=\frac{F_X(7)-F_X(5)}{F_X(7)}.
+\]
+
+\section{Probability Density Function (PDF)}
+
+\subsection{Definition (via Limiting Argument)}
+
+For a continuous random variable $X$, the PDF is defined as
+\[
+f_X(x)=\lim_{\varepsilon\to 0}
+\frac{\Pr(x\le X<x+\varepsilon)}{\varepsilon}.
+\]
+
+\subsection{Relationship Between PDF and CDF}
+
+\[
+\Pr(x\le X<x+\varepsilon)
+=F_X(x+\varepsilon)-F_X(x).
+\]
+
+Substituting,
+\[
+f_X(x)=\lim_{\varepsilon\to 0}
+\frac{F_X(x+\varepsilon)-F_X(x)}{\varepsilon}.
+\]
+
+Hence,
+\[
+f_X(x)=\frac{d}{dx}F_X(x).
+\]
+
+\subsection{Fundamental Result}
+
+The PDF of a random variable is the derivative of its CDF.
+
+Conversely, the CDF can be obtained by integrating the PDF.
+
+\section{Expectation of Random Variables}
+
+\subsection{Definition}
+
+The expectation of a random variable represents its mean value.
+
+Expectation is also interpreted as the first moment of a random variable.
+
+\subsection{Expectation of a Function of a Random Variable}
+
+For a function $g(X)$, the expectation is written as
+\[
+E[g(X)].
+\]
+
+\subsection{Linear Operations with Expectation}
+
+Expectation is linear. For constants $a,b$ and random variables $X,Y$,
+\[
+E[aX+bY]=aE[X]+bE[Y].
+\]
+
+\section{Moments and Central Moments}
+
+\subsection{$n^{\text{th}}$ Moment}
+
+The $n^{\text{th}}$ moment of a random variable $X$ is
+\[
+E[X^{n}].
+\]
+
+\subsection{Central Moments}
+
+Central moments are taken about the mean $\mu$,
+\[
+E[(X-\mu)^{n}].
+\]
+
+\subsection{Important Central Moments}
+
+\begin{itemize}
+    \item Variance: second central moment
+    \item Skewness: third central moment
+    \item Kurtosis: fourth central moment
+\end{itemize}
+
+\section{Logical Flow Summary for Exam Revision}
+
+\begin{itemize}
+    \item Start with the definition of the CDF
+    \item Use CDF properties to test validity
+    \item Compute probabilities using CDF differences
+    \item Derive the PDF from the CDF
+    \item Interpret expectation as a moment
+    \item Apply linearity of expectation
+    \item Extend to higher-order and central moments
+\end{itemize}
+
+\end{document}
