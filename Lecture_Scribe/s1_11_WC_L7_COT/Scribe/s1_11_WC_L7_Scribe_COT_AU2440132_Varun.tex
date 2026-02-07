@@ -1,0 +1,230 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,geometry,graphicx}
+\geometry{margin=1in}
+\title{CSE400: Fundamentals of Probability in Computing\\
+Lecture 7 Scribe: Expectation, CDFs, PDFs and Problem Solving}
+\author{Based strictly on Lecture Slides}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This lecture covers:
+\begin{itemize}
+\item Cumulative Distribution Function (CDF)
+\item Probability Density Function (PDF)
+\item Relationship between PDF and CDF
+\item Expectation of Random Variables (intro outline)
+\end{itemize}
+
+The lecture develops definitions, properties, and examples of CDF and PDF, and builds intuition using analogies.
+
+\section{Intuition: Water Tank Analogy}
+The cumulative distribution function can be understood using a water tank analogy.
+
+\subsection*{Interpretation}
+\begin{itemize}
+\item Height $h$ of water $\rightarrow$ value of random variable
+\item Volume of water up to height $h$ $\rightarrow$ cumulative probability
+\end{itemize}
+
+Volume up to height $h$:
+\[
+V(h)=\int_0^h \pi R^2\,dh = (\pi R^2)h
+\]
+
+\begin{itemize}
+\item $\pi R^2$ behaves like a constant density (analogous to PDF of uniform distribution)
+\item Total tank volume $\pi R^2 H$ corresponds to total probability $=1$
+\end{itemize}
+
+Thus:
+\begin{itemize}
+\item Cumulative volume $\rightarrow$ CDF
+\item Density of water per unit height $\rightarrow$ PDF
+\end{itemize}
+
+\section{Cumulative Distribution Function (CDF)}
+
+\subsection{Definition}
+The CDF of a random variable $X$ is defined as:
+\[
+F_X(x)=\Pr(X\le x), \quad -\infty<x<\infty
+\]
+
+Most information about the random experiment described by $X$ is determined by the behavior of $F_X(x)$.
+
+\subsection{Properties of CDF}
+\begin{enumerate}
+\item \textbf{Bounds:}
+\[
+0 \le F_X(x) \le 1
+\]
+
+\item \textbf{Limits:}
+\[
+F_X(-\infty)=0,\quad F_X(\infty)=1
+\]
+
+\item \textbf{Monotonicity:}  
+For $x_1<x_2$:
+\[
+F_X(x_1)\le F_X(x_2)
+\]
+
+\item \textbf{Interval Probability:}
+\[
+\Pr(x_1<X\le x_2)=F_X(x_2)-F_X(x_1)
+\]
+\end{enumerate}
+
+\section{Valid CDF Identification}
+
+\subsection*{Example 1: Determine Valid CDF}
+Check validity of:
+
+\begin{enumerate}
+\item 
+\[
+F_X(x)=\frac{1}{2}+\frac{1}{\pi}\tan^{-1}(x)
+\]
+Valid CDF.
+
+\item 
+\[
+F_X(x)=[1-e^{-x}]u(x)
+\]
+Valid CDF.
+
+\item 
+\[
+F_X(x)=e^{-x^2}
+\]
+Invalid (does not satisfy boundary conditions).
+
+\item 
+\[
+F_X(x)=x^2u(x)
+\]
+Invalid (does not approach 1 as $x\to\infty$).
+\end{enumerate}
+
+\section{Example Using CDF}
+Given:
+\[
+F_X(x)=(1-e^{-x})u(x)
+\]
+
+\subsection{Find Probabilities}
+
+\subsubsection*{1. $\Pr(X>5)$}
+\[
+\Pr(X>5)=1-\Pr(X\le5)
+\]
+\[
+=1-F_X(5)
+\]
+\[
+=1-(1-e^{-5})=e^{-5}
+\]
+
+\subsubsection*{2. $\Pr(X<5)$}
+\[
+\Pr(X<5)=F_X(5)=1-e^{-5}
+\]
+
+\subsubsection*{3. $\Pr(3<X<7)$}
+\[
+\Pr(3<X<7)=F_X(7)-F_X(3)
+\]
+\[
+=(1-e^{-7})-(1-e^{-3})
+\]
+\[
+=e^{-3}-e^{-7}
+\]
+
+\subsubsection*{4. Conditional Probability}
+\[
+\Pr(X>5\mid X<7)=\frac{\Pr(5<X<7)}{\Pr(X<7)}
+\]
+\[
+=\frac{F_X(7)-F_X(5)}{F_X(7)}
+\]
+
+\section{Probability Density Function (PDF)}
+
+\subsection{Definition}
+For continuous random variables:
+\[
+f_X(x)=\lim_{\epsilon\to0}\frac{\Pr(x\le X<x+\epsilon)}{\epsilon}
+\]
+
+Using CDF:
+\[
+\Pr(x\le X<x+\epsilon)=F_X(x+\epsilon)-F_X(x)
+\]
+
+Thus:
+\[
+f_X(x)=\lim_{\epsilon\to0}\frac{F_X(x+\epsilon)-F_X(x)}{\epsilon}
+\]
+
+\subsection{Derivative Relationship}
+\[
+f_X(x)=\frac{dF_X(x)}{dx}
+\]
+
+\subsection{Key Result}
+\begin{itemize}
+\item PDF is derivative of CDF
+\item CDF is integral of PDF
+\end{itemize}
+
+\[
+F_X(x)=\int_{-\infty}^{x} f_X(t)\,dt
+\]
+
+\section{Conceptual Summary}
+\begin{itemize}
+\item CDF gives cumulative probability up to $x$
+\item PDF gives density at point $x$
+\item CDF must be monotonic and bounded
+\item PDF integrates to 1 over entire range
+\item Probability over interval found using CDF difference
+\end{itemize}
+
+\section{Expectation of Random Variables}
+(Only outline provided in lecture)
+\begin{itemize}
+\item Definition of expectation
+\item Expectation of function of random variable
+\item Linearity of expectation
+\item Moments and central moments
+\item Variance, skewness, kurtosis
+\end{itemize}
+
+(Detailed derivations not included in provided lecture slides.)
+
+\section{Exam Preparation Notes}
+\subsection*{Must Remember}
+\begin{itemize}
+\item $F_X(x)=\Pr(X\le x)$
+\item $0\le F_X(x)\le1$
+\item $F_X(-\infty)=0,\;F_X(\infty)=1$
+\item $\Pr(a<X\le b)=F_X(b)-F_X(a)$
+\item $f_X(x)=\dfrac{dF_X(x)}{dx}$
+\item $F_X(x)=\int_{-\infty}^{x} f_X(t)dt$
+\end{itemize}
+
+\subsection*{Typical Exam Questions}
+\begin{itemize}
+\item Check if function is valid CDF
+\item Compute probabilities from CDF
+\item Find PDF from CDF
+\item Derive relation between PDF and CDF
+\item Conditional probability using CDF
+\end{itemize}
+
+\end{document}
