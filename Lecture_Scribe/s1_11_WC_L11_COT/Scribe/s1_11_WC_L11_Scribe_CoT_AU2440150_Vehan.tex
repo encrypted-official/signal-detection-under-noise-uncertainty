@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{CSE 400 — Lecture 11 Scribe}}\\
+\vspace{0.2em}
+Fundamentals of Probability in Computing\\
+Lecture 11: Transformation of Random Variables
+\end{center}
+
+\section{Transformation of Random Variables}
+
+\subsection{Problem Setting}
+
+Let $X$ be a continuous random variable (CRV) with known:
+
+PDF: $f_X(x)$
+
+CDF: $F_X(x)$
+
+These are assumed known a priori.
+
+Define a new random variable:
+\[
+Y = g(X)
+\]
+
+The objective is to determine:
+\[
+F_Y(y), \qquad f_Y(y)
+\]
+
+The transformation is treated under the assumption of monotonicity of $g(\cdot)$.
+
+Two cases arise:
+\begin{itemize}[noitemsep]
+\item Monotonically increasing
+\item Monotonically decreasing
+\end{itemize}
+
+\subsection{Step 1: CDF Method}
+
+\[
+F_Y(y) = P(Y \le y)
+\]
+
+Since $Y = g(X)$,
+\[
+F_Y(y) = P(g(X) \le y)
+\]
+
+The next step depends on monotonicity of $g(\cdot)$.
+
+\subsubsection*{Case 1: Monotonically Increasing}
+
+If $g$ is increasing:
+\[
+g(X) \le y \iff X \le g^{-1}(y)
+\]
+
+Thus,
+\[
+F_Y(y) = P(X \le g^{-1}(y)) = F_X(g^{-1}(y))
+\]
+
+Differentiate to obtain PDF:
+\[
+f_Y(y) = \frac{d}{dy} F_Y(y)
+= \frac{d}{dy} F_X(g^{-1}(y))
+\]
+
+Using chain rule:
+\[
+f_Y(y) = f_X(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y)
+\]
+
+Equivalently written:
+\[
+f_Y(y) = f_X(x) \frac{dx}{dy} \quad \text{evaluated at } x = g^{-1}(y)
+\]
+
+\subsubsection*{Case 2: Monotonically Decreasing}
+
+If $g$ is decreasing:
+\[
+g(X) \le y \iff X \ge g^{-1}(y)
+\]
+
+Thus,
+\[
+F_Y(y) = P(X \ge g^{-1}(y))
+= 1 - F_X(g^{-1}(y))
+\]
+
+Differentiate:
+\[
+f_Y(y) = \frac{d}{dy} \left[1 - F_X(g^{-1}(y))\right]
+\]
+
+\[
+= - f_X(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y)
+\]
+
+Since $\frac{d}{dy} g^{-1}(y) < 0$,
+\[
+f_Y(y) = f_X(x) \frac{dx}{dy} \quad \text{evaluated at } x = g^{-1}(y)
+\]
+
+\subsection{Change of Limits}
+
+Adjust limits according to the mapping $y = g(x)$.
+
+The support of $Y$ is determined by transforming the support of $X$.
+
+\section{Worked Example}
+
+Given:
+\[
+X \sim \text{Uniform}(-1,1)
+\]
+
+\[
+f_X(x) =
+\begin{cases}
+\frac{1}{2}, & -1 < x < 1 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+Define:
+\[
+Y = \sin\left(\frac{\pi X}{2}\right)
+\]
+
+Find $f_Y(y)$.
+
+\subsection*{Step 1: Inverse Transformation}
+
+\[
+X = \frac{2}{\pi} \sin^{-1}(Y)
+\]
+
+\subsection*{Step 2: Derivative}
+
+\[
+\frac{dx}{dy} = \frac{2}{\pi} \cdot \frac{1}{\sqrt{1 - y^2}}
+\]
+
+\subsection*{Step 3: Apply Transformation Formula}
+
+\[
+f_Y(y) = f_X(x) \frac{dx}{dy}
+\]
+
+Substitute $f_X(x) = \frac{1}{2}$:
+
+\[
+f_Y(y) = \frac{1}{2} \cdot \frac{2}{\pi} \cdot \frac{1}{\sqrt{1-y^2}}
+\]
+
+\[
+f_Y(y) = \frac{1}{\pi \sqrt{1-y^2}}
+\]
+
+Support:
+
+Since $x \in (-1,1)$,
+\[
+y \in (-1,1)
+\]
+
+Final answer:
+\[
+f_Y(y) =
+\begin{cases}
+\dfrac{1}{\pi \sqrt{1-y^2}}, & -1 < y < 1 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\section{Function of Two Random Variables}
+
+Let:
+\[
+Z = X + Y
+\]
+
+Goal:
+\begin{enumerate}[label=\arabic*.]
+\item Find $f_Z(z)$.
+\item If $X$ and $Y$ are independent, find $f_Z(z)$.
+\item If $X,Y \sim N(0,1)$, prove $Z \sim N(0,2)$.
+\item If exponential with parameter $\lambda$, find $f_Z(z)$.
+\end{enumerate}
+
+\section{Derivation of $f_Z(z)$}
+
+\subsection*{Step 1: CDF Method}
+
+\[
+F_Z(z) = P(Z \le z)
+= P(X+Y \le z)
+\]
+
+Region:
+\[
+\{(x,y) : x + y \le z\}
+\]
+
+Line:
+\[
+x + y = z
+\]
+
+Region below the line.
+
+\subsection*{Step 2: Double Integral Form}
+
+\[
+F_Z(z) = \int_{-\infty}^{\infty}
+\int_{-\infty}^{z-y}
+f_{XY}(x,y)\, dx\, dy
+\]
+
+Equivalently (order switched):
+\[
+F_Z(z) = \int_{-\infty}^{\infty}
+\int_{-\infty}^{z-x}
+f_{XY}(x,y)\, dy\, dx
+\]
+
+\subsection*{Step 3: If $X$ and $Y$ Independent}
+
+\[
+f_{XY}(x,y) = f_X(x) f_Y(y)
+\]
+
+Thus,
+\[
+f_Z(z) = \int_{-\infty}^{\infty}
+f_X(x) f_Y(z-x)\, dx
+\]
+
+This is the convolution form for the PDF of $Z = X + Y$.
+
+\section{Summary of Core Results}
+
+\subsection*{Single Variable Transformation}
+
+If $Y = g(X)$ and $g$ is monotone:
+\[
+f_Y(y) = f_X(g^{-1}(y)) \frac{d}{dy} g^{-1}(y)
+\]
+
+\subsection*{Sum of Two Random Variables}
+
+\[
+F_Z(z) = P(X+Y \le z)
+\]
+
+If independent:
+\[
+f_Z(z) = \int_{-\infty}^{\infty}
+f_X(x) f_Y(z-x)\, dx
+\]
+
+\end{document}
