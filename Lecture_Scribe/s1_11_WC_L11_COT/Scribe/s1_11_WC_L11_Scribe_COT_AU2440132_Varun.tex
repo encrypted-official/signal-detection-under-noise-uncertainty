@@ -1,0 +1,348 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\setstretch{1.2}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Name - Varun Hotani}
+\fancyhead[R]{Roll No. - AU2440132}
+\fancyfoot[C]{\thepage}
+
+\title{\textbf{CSE400: Fundamentals of Probability in Computing}\\
+\Large Lecture 11: Transformation of Random Variables}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Lecture Information}
+
+\begin{itemize}
+    \item Course: CSE400 - Fundamentals of Probability in Computing
+    \item Topic: Transformation of Random Variables
+    \item Instructor: Dhaval Patel, PhD
+    \item Date: February 10, 2026
+\end{itemize}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+%--------------------------------------------------
+\section{Introduction}
+
+In this lecture, we study:
+
+\begin{enumerate}
+    \item Transformation of Random Variables
+    \item Function of Two Random Variables
+    \item Illustrative Example: $Z = X + Y$
+\end{enumerate}
+
+The goal is to learn systematic techniques to determine the probability distribution of a new random variable obtained as a function of one or more given random variables.
+
+%--------------------------------------------------
+\section{Transformation of Random Variables}
+
+\subsection{Basic Definition}
+
+Let $X$ be a random variable with known probability distribution.
+
+Let a new random variable $Y$ be defined as:
+\[
+Y = g(X)
+\]
+
+where $g(\cdot)$ is a function of $X$.
+
+Our objective:
+\[
+\text{Find the distribution of } Y
+\]
+
+\subsection{Method for Continuous Random Variables}
+
+Assume:
+\begin{itemize}
+    \item $X$ is continuous
+    \item $g(\cdot)$ is differentiable and monotonic
+\end{itemize}
+
+We proceed step-by-step.
+
+\subsubsection*{Step 1: CDF Approach}
+
+Define:
+\[
+F_Y(y) = P(Y \le y)
+\]
+
+Since $Y = g(X)$,
+\[
+F_Y(y) = P(g(X) \le y)
+\]
+
+If $g$ is strictly increasing:
+
+\[
+P(g(X) \le y) = P(X \le g^{-1}(y))
+\]
+
+Thus,
+
+\[
+F_Y(y) = F_X(g^{-1}(y))
+\]
+
+\subsubsection*{Step 2: Differentiate to Get PDF}
+
+\[
+f_Y(y) = \frac{d}{dy}F_Y(y)
+\]
+
+Using chain rule:
+
+\[
+f_Y(y) = f_X(g^{-1}(y)) \left| \frac{d}{dy} g^{-1}(y) \right|
+\]
+
+\subsection{Final Formula (Single Variable Transformation)}
+
+\[
+\boxed{
+f_Y(y) = f_X(x)\left| \frac{dx}{dy} \right|
+}
+\]
+
+where $x = g^{-1}(y)$.
+
+This formula is fundamental for exams.
+
+%--------------------------------------------------
+\section{Function of Two Random Variables}
+
+Now consider two random variables:
+
+\[
+Z = h(X,Y)
+\]
+
+where $(X,Y)$ has joint distribution $f_{X,Y}(x,y)$.
+
+Our goal:
+\[
+\text{Find the distribution of } Z
+\]
+
+\subsection{Joint Transformation Method}
+
+Let:
+
+\[
+U = g_1(X,Y), \quad V = g_2(X,Y)
+\]
+
+We compute the joint density of $(U,V)$ using the Jacobian method.
+
+\subsection{Jacobian Definition}
+
+If the transformation is invertible:
+
+\[
+(x,y) \rightarrow (u,v)
+\]
+
+Then:
+
+\[
+f_{U,V}(u,v) = f_{X,Y}(x,y)\left|J\right|
+\]
+
+where Jacobian:
+
+\[
+J =
+\begin{vmatrix}
+\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+\end{vmatrix}
+\]
+
+\subsection{Procedure}
+
+\begin{enumerate}
+    \item Define transformation
+    \item Find inverse transformation
+    \item Compute Jacobian determinant
+    \item Substitute into joint density
+    \item Integrate out unwanted variable if needed
+\end{enumerate}
+
+%--------------------------------------------------
+\section{Illustrative Example: $Z = X + Y$}
+
+We now derive distribution of:
+
+\[
+Z = X + Y
+\]
+
+\subsection{Assumptions}
+
+Let:
+\begin{itemize}
+    \item $X$ and $Y$ be continuous random variables
+    \item Joint density: $f_{X,Y}(x,y)$
+\end{itemize}
+
+\subsection{CDF Derivation}
+
+Start from definition:
+
+\[
+F_Z(z) = P(Z \le z)
+\]
+
+Since $Z = X + Y$,
+
+\[
+F_Z(z) = P(X + Y \le z)
+\]
+
+\subsection{Region Interpretation}
+
+The event:
+
+\[
+X + Y \le z
+\]
+
+represents a region in the $xy$-plane.
+
+Thus,
+
+\[
+F_Z(z) =
+\int\int_{x+y\le z} f_{X,Y}(x,y)\, dx\, dy
+\]
+
+\subsection{PDF of Z}
+
+Differentiate:
+
+\[
+f_Z(z) = \frac{d}{dz}F_Z(z)
+\]
+
+By differentiation under the integral sign:
+
+\[
+f_Z(z) =
+\int_{-\infty}^{\infty} f_{X,Y}(x,z-x)\, dx
+\]
+
+\subsection{If $X$ and $Y$ Are Independent}
+
+If independent:
+
+\[
+f_{X,Y}(x,y) = f_X(x)f_Y(y)
+\]
+
+Substitute:
+
+\[
+f_Z(z) =
+\int_{-\infty}^{\infty} f_X(x)f_Y(z-x)\, dx
+\]
+
+\subsection{Final Result (Convolution)}
+
+\[
+\boxed{
+f_Z(z) = (f_X * f_Y)(z)
+=
+\int_{-\infty}^{\infty}
+f_X(x)f_Y(z-x)\, dx
+}
+\]
+
+This is called the \textbf{convolution} of two densities.
+
+\newpage
+
+%--------------------------------------------------
+\section{Logical Understanding for Exams}
+
+\subsection{Why Convolution Appears}
+
+Because:
+
+\begin{itemize}
+    \item $Z=z$ occurs when $X=x$ and $Y=z-x$
+    \item We integrate over all possible $x$
+\end{itemize}
+
+Thus probability accumulates across all decompositions of $z$.
+
+\subsection{Decision Logic}
+
+\begin{itemize}
+    \item If $Y = g(X)$ → Use single-variable transformation formula.
+    \item If $Z = X + Y$ and independent → Use convolution.
+    \item If general transformation of two variables → Use Jacobian method.
+\end{itemize}
+
+%--------------------------------------------------
+\section{Summary for Revision}
+
+\subsection*{Key Formulas}
+
+\textbf{1. Single Variable Transformation:}
+
+\[
+f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right|
+\]
+
+\textbf{2. Joint Transformation (Jacobian):}
+
+\[
+f_{U,V}(u,v) = f_{X,Y}(x,y)|J|
+\]
+
+\textbf{3. Sum of Independent Variables:}
+
+\[
+f_Z(z) = \int f_X(x)f_Y(z-x)\,dx
+\]
+
+\subsection*{Exam Strategy}
+
+\begin{enumerate}
+    \item Identify transformation type.
+    \item Check independence.
+    \item Decide between:
+    \begin{itemize}
+        \item Inverse + derivative method
+        \item Jacobian method
+        \item Convolution method
+    \end{itemize}
+    \item Clearly define integration limits.
+    \item Always justify steps.
+\end{enumerate}
+
+%--------------------------------------------------
+
+\section*{End of Lecture 11 Scribe}
+
+\end{document}
