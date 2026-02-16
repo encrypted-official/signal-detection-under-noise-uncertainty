@@ -1,0 +1,144 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}}
+\author{\textbf{Kensi Patel - AU2440102}}
+\date{Lecture 11}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Lecture 11: Transformation of Random Variables}
+
+Instructor: Dhaval Patel, PhD
+
+\section*{1. Problem Setting and Notation}
+\begin{itemize}
+    \item Given a continuous random variable $X$ with known PDF $f_X(x)$.
+    \item Define a new random variable:\[Y = g(X)\]
+    \item Goal: Find $F_Y(y)$ and $f_Y(y)$.
+\end{itemize}
+
+
+\section*{2. Lecture Flow and Logical Dependencies}
+\begin{enumerate}
+    \item Transformation of one random variable
+    \item Function of two random variables
+    \item Example: $Z=X+Y$
+\end{enumerate}
+Logical progression:
+\[\text{Single RV} \rightarrow \text{Joint RV} \rightarrow \text{Example}\]
+
+
+\section*{3. Transformation of One Random Variable}
+
+\subsection*{3.1 Assumptions}
+\begin{itemize}
+    \item Transformation: \[Y=g(X)\]
+    \item Assume $g(\cdot)$ is monotonic (increasing or decreasing), so the inverse exists:\[X = g^{-1}(Y)\]
+\end{itemize}
+
+\subsection*{3.2 Step 1: CDF Method}
+\begin{itemize}
+    \item Definition:\[F_Y(y)=P(Y\le y)\]
+    \item Substitute transformation:\[F_Y(y)=P(g(X)\le y)\]
+    \item If $g$ is increasing:\[F_Y(y)=P\left(X\le g^{-1}(y)\right)\]
+    \item Hence:\[F_Y(y)=F_X\big(g^{-1}(y)\big)\]
+\end{itemize}
+
+\subsection*{3.3 Step 2: PDF from CDF}
+\begin{itemize}
+    \item Differentiate:\[f_Y(y)=\frac{d}{dy}F_Y(y)\]
+    \item Substitute:\[f_Y(y)=\frac{d}{dy}F_X\big(g^{-1}(y)\big)\]
+    \item Using the chain rule:\[f_Y(y)=f_X\big(g^{-1}(y)\big)\cdot \frac{d}{dy}g^{-1}(y)\]
+    \item Since\[\frac{d}{dy}g^{-1}(y)=\frac{dx}{dy},\]
+    \item Final transformation formula:\[f_Y(y)=f_X(x)\left|\frac{dx}{dy}\right|_{x=g^{-1}(y)}\]
+
+\end{itemize}
+
+\subsection*{3.4 Decreasing Transformation Case}
+\begin{itemize}
+    \item If $g(\cdot)$ is decreasing:\[F_Y(y)=P(X\ge g^{-1}(y))=1-F_X\big(g^{-1}(y)\big)\]
+    \item Differentiate:\[f_Y(y)=-f_X(x)\frac{dx}{dy}\]
+    \item Taking magnitude gives a unified result:\[f_Y(y)=f_X(x)\left|\frac{dx}{dy}\right|\]
+\end{itemize}
+
+
+\section*{4. Worked Example}
+\begin{itemize}
+    \item Given:\[X\sim U(-1,1)\]
+    \item PDF:\[f_X(x)=\begin{cases}\dfrac{1}{2}, & -1<x<1\\0, & \text{otherwise}\end{cases}\]
+    \item Transformation:\[Y=\sin\left(\frac{\pi X}{2}\right)\]
+\end{itemize}
+
+\subsection*{4.1 Inverse Mapping}
+\[x=\frac{2}{\pi}\sin^{-1}(y)\]
+
+\subsection*{4.2 Differentiation}
+\[\frac{dx}{dy}=\frac{2}{\pi}\frac{1}{\sqrt{1-y^2}}\]
+
+\subsection*{4.3 PDF of $Y$}
+\begin{itemize}
+    \item Apply transformation rule:\[f_Y(y)=f_X(x)\left|\frac{dx}{dy}\right|\]
+    \item Substitute $f_X(x)=\frac{1}{2}$:\[f_Y(y)=\frac{1}{2}\cdot \frac{2}{\pi}\frac{1}{\sqrt{1-y^2}}\]
+    \item Final result:\[f_Y(y)=\frac{1}{\pi\sqrt{1-y^2}}, \quad -1<y<1\]
+    \item Limits from mapping:\[x=-1 \Rightarrow y=-1, \qquad x=1 \Rightarrow y=1\]
+\end{itemize}
+
+
+\section*{5. Function of Two Random Variables}
+
+\begin{itemize}
+    \item Define:\[Z=X+Y\]
+\end{itemize}
+
+Goal: Find $f_Z(z)$.
+
+\textbf{Examples mentioned:}
+\begin{itemize}
+    \item If $X,Y\sim N(0,1)$ then $Z\sim N(0,2)$
+    \item Exponential RV case discussed
+\end{itemize}
+
+
+\section*{6. Distribution of $Z=X+Y$}
+
+\subsection*{6.1 Start from CDF}
+\[F_Z(z)=P(Z\le z)=P(X+Y\le z)\]
+
+\subsection*{6.2 Convert to Double Integral}
+\[F_Z(z)=\iint_{x+y\le z} f_{XY}(x,y)\,dx\,dy\]
+Region defined by boundary:\[x+y=z\]
+
+\subsection*{6.3 Change Order of Integration}
+
+Equivalent expression:\[F_Z(z)=\int_{-\infty}^{\infty}\int_{-\infty}^{z-x}f_{XY}(x,y)\,dy\,dx\]
+
+
+\section*{7. Logical Flow Summary}
+
+\begin{itemize}
+    \item Start from CDF definition
+    \item Use inverse mapping
+    \item Differentiate to obtain PDF
+    \item Extend idea to joint RVs
+    \item Apply to $Z=X+Y$
+\end{itemize}
+
+
+\section*{8. Final Key Formulas}
+\subsection*{Single RV Transformation}
+CDF Transformation
+\[F_Y(y)=F_X\big(g^{-1}(y)\big)\]
+PDF Transformation
+\[f_Y(y)=f_X\big(g^{-1}(y)\big)\left|\frac{dx}{dy}\right|\]
+
+\subsection*{Sum of Two Random Variables}
+Sum CDF
+\[F_Z(z)=\iint_{x+y\le z} f_{XY}(x,y)\,dx\,dy\]
+
+\end{document}
