@@ -1,0 +1,423 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{Name- Parthiv Karangiya \quad Roll no.- AU2440016}}
+\rhead{\textbf{CSE400 Lecture 11}}
+\cfoot{\thepage}
+
+\title{\textbf{CSE400: Fundamentals of Probability in Computing}\\
+\Large Lecture 11: Transformation of Random Variables}
+\author{\textbf{Dhaval Patel, PhD}\\Associate Professor\\SEAS, Ahmedabad University}
+\date{February 10, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture Outline}
+This lecture covers the following major topics:
+\begin{enumerate}
+    \item Transformation of Random Variables
+    \item Function of Two Random Variables
+    \item Illustrative Example: Detailed derivation for the case $Z = X + Y$
+\end{enumerate}
+
+\section{Transformation of Random Variables}
+
+\subsection{Basic Setup}
+Assume we have a continuous random variable $X$ whose distribution is known.
+
+We assume:
+\[
+f_X(x) \quad \text{(PDF of $X$ is known)}
+\]
+and
+\[
+F_X(x) \quad \text{(CDF of $X$ is known)}
+\]
+
+Now define a new random variable $Y$ as a function of $X$:
+\[
+Y = g(X)
+\]
+
+The objective is to find:
+\[
+F_Y(y) \quad \text{and} \quad f_Y(y)
+\]
+
+\subsection{Important Idea: Inverting the Transformation}
+If $Y = g(X)$ is invertible, then we can write:
+\[
+X = g^{-1}(Y)
+\]
+
+This inversion is the key step in computing the CDF and PDF of $Y$.
+
+\section{CDF Method for Transformation}
+
+\subsection{Step 1: Derive the CDF of $Y$}
+The CDF of $Y$ is defined as:
+\[
+F_Y(y) = P(Y \le y)
+\]
+
+Since $Y = g(X)$:
+\[
+F_Y(y) = P(g(X) \le y)
+\]
+
+At this stage, the monotonic nature of $g(\cdot)$ matters.
+
+\subsection{Case 1: $g(\cdot)$ is Monotonically Increasing (+ve Increasing)}
+
+If $g(\cdot)$ is increasing, then:
+\[
+g(X) \le y \iff X \le g^{-1}(y)
+\]
+
+So:
+\[
+F_Y(y) = P(X \le g^{-1}(y))
+\]
+
+Thus:
+\[
+F_Y(y) = F_X(g^{-1}(y))
+\]
+
+\subsection{Step 2: Differentiate to Get PDF}
+Now:
+\[
+f_Y(y) = \frac{d}{dy}F_Y(y)
+\]
+
+Using chain rule:
+\[
+f_Y(y) = \frac{d}{dy}\Big(F_X(g^{-1}(y))\Big)
+\]
+
+So:
+\[
+f_Y(y) = f_X(g^{-1}(y)) \cdot \frac{d}{dy}\big(g^{-1}(y)\big)
+\]
+
+Let:
+\[
+x = g^{-1}(y)
+\]
+
+Then:
+\[
+f_Y(y) = f_X(x)\cdot \frac{dx}{dy}
+\]
+
+Since PDF must be non-negative, we write the final standard form:
+\[
+f_Y(y) = f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|
+\]
+
+\subsection{Final PDF Transformation Formula (Monotone Case)}
+\[
+\boxed{
+f_Y(y) = f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|
+}
+\]
+
+\section{Transformation when $g(\cdot)$ is Monotonically Decreasing (-ve Decreasing)}
+
+\subsection{Step 1: CDF of $Y$}
+Again:
+\[
+F_Y(y) = P(Y \le y) = P(g(X)\le y)
+\]
+
+If $g(\cdot)$ is decreasing, then:
+\[
+g(X)\le y \iff X \ge g^{-1}(y)
+\]
+
+So:
+\[
+F_Y(y) = P(X \ge g^{-1}(y))
+\]
+
+Using complement rule:
+\[
+P(X \ge a) = 1 - P(X < a)
+\]
+
+Thus:
+\[
+F_Y(y) = 1 - F_X(g^{-1}(y))
+\]
+
+\subsection{Step 2: Differentiate to Get PDF}
+Differentiate:
+\[
+f_Y(y) = \frac{d}{dy}F_Y(y)
+\]
+
+So:
+\[
+f_Y(y) = \frac{d}{dy}\Big(1 - F_X(g^{-1}(y))\Big)
+\]
+
+\[
+f_Y(y) = - f_X(g^{-1}(y))\cdot \frac{d}{dy}g^{-1}(y)
+\]
+
+Since the derivative is negative for decreasing transformations, we again take absolute value:
+
+\[
+\boxed{
+f_Y(y) = f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|
+}
+\]
+
+\subsection{Conclusion}
+Therefore, for both monotonic increasing and monotonic decreasing transformations, the same final PDF formula holds.
+
+\section{Example: $X \sim U(-1,1)$ and $Y = \sin\left(\frac{\pi X}{2}\right)$}
+
+\subsection{Given}
+$X$ is uniformly distributed over $(-1,1)$:
+\[
+f_X(x) =
+\begin{cases}
+\frac{1}{2}, & -1 < x < 1\\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+Transformation is:
+\[
+Y = \sin\left(\frac{\pi X}{2}\right)
+\]
+
+\subsection{Step 1: Invert the Transformation}
+We solve for $x$:
+
+\[
+y = \sin\left(\frac{\pi x}{2}\right)
+\]
+
+Take inverse sine:
+\[
+\sin^{-1}(y) = \frac{\pi x}{2}
+\]
+
+Thus:
+\[
+x = \frac{2}{\pi}\sin^{-1}(y)
+\]
+
+So:
+\[
+g^{-1}(y) = \frac{2}{\pi}\sin^{-1}(y)
+\]
+
+\subsection{Step 2: Compute Derivative}
+\[
+\frac{dx}{dy} = \frac{2}{\pi}\cdot \frac{d}{dy}\sin^{-1}(y)
+\]
+
+We know:
+\[
+\frac{d}{dy}\sin^{-1}(y) = \frac{1}{\sqrt{1-y^2}}
+\]
+
+So:
+\[
+\frac{dx}{dy} = \frac{2}{\pi}\cdot \frac{1}{\sqrt{1-y^2}}
+\]
+
+\subsection{Step 3: Apply Transformation Formula}
+\[
+f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right|
+\]
+
+Given $f_X(x)=\frac{1}{2}$ for $-1<x<1$.
+
+Thus:
+\[
+f_Y(y) = \frac{1}{2}\cdot \left(\frac{2}{\pi}\cdot \frac{1}{\sqrt{1-y^2}}\right)
+\]
+
+\[
+f_Y(y) = \frac{1}{\pi\sqrt{1-y^2}}
+\]
+
+\subsection{Final Answer}
+\[
+\boxed{
+f_Y(y) = \frac{1}{\pi\sqrt{1-y^2}}, \quad -1<y<1
+}
+\]
+
+\section{Function of Two Random Variables}
+
+\subsection{General Setup}
+Let $X$ and $Y$ be random variables.
+
+We define a new random variable $Z$ as a function of two random variables:
+\[
+Z = g(X,Y)
+\]
+
+Common examples include:
+\[
+Z = X+Y,\quad Z = X-Y,\quad Z = \frac{X}{Y},\quad Z = XY
+\]
+
+The objective is to find the distribution of $Z$, typically:
+\[
+F_Z(z) \quad \text{or} \quad f_Z(z)
+\]
+
+\section{Illustrative Example: $Z = X + Y$}
+
+\subsection{Goal}
+Define:
+\[
+Z = X+Y
+\]
+
+We want to compute:
+\[
+F_Z(z) = P(Z \le z)
+\]
+
+That is:
+\[
+F_Z(z) = P(X+Y \le z)
+\]
+
+\subsection{CDF Derivation}
+\[
+F_Z(z) = P(X+Y \le z)
+\]
+
+This probability corresponds to a region in the $(x,y)$ plane:
+\[
+x+y \le z
+\]
+
+Equivalently:
+\[
+y \le z-x
+\]
+
+\subsection{Region-Based Integration Form}
+To compute this probability using the joint PDF:
+\[
+f_{X,Y}(x,y)
+\]
+
+we integrate over the region:
+\[
+\{(x,y): x+y \le z\}
+\]
+
+Thus:
+\[
+F_Z(z) = \int\int_{x+y \le z} f_{X,Y}(x,y)\,dx\,dy
+\]
+
+\subsection{Integral Expression (As Written in Lecture)}
+The lecture shows the CDF computed as:
+
+\[
+F_Z(z)=P(Z\le z)
+\]
+
+\[
+F_Z(z)=P(X+Y\le z)
+\]
+
+and written as a double integral:
+
+\[
+F_Z(z) = \int_{-\infty}^{\infty}\int_{-\infty}^{z-x} f_{X,Y}(x,y)\,dy\,dx
+\]
+
+This represents:
+\begin{itemize}
+    \item outer integral over $x$
+    \item inner integral over $y$ from $-\infty$ to $z-x$
+\end{itemize}
+
+\subsection{Alternative Order of Integration (As Shown)}
+The lecture also illustrates changing the integration order using region geometry.
+
+From the graph, the boundary line is:
+\[
+y = z-x
+\]
+
+So the integration can also be expressed by integrating first over $x$ with bounds depending on $y$.
+
+The lecture representation indicates rewriting into a second integral form by changing limits, written as:
+
+\[
+F_Z(z) = \int_{y=-\infty}^{z}\int_{x=-\infty}^{z-y} f_{X,Y}(x,y)\,dx\,dy
+\]
+
+This matches the region:
+\[
+x \le z-y
+\]
+
+\subsection{Key Conclusion}
+The derived CDF of $Z=X+Y$ is computed using region integration:
+
+\[
+\boxed{
+F_Z(z)=\int\int_{x+y\le z} f_{X,Y}(x,y)\,dx\,dy
+}
+\]
+
+and the corresponding limit form:
+
+\[
+\boxed{
+F_Z(z) = \int_{-\infty}^{\infty}\int_{-\infty}^{z-x} f_{X,Y}(x,y)\,dy\,dx
+}
+\]
+
+\section{Important Exam Notes from Lecture}
+\begin{itemize}
+    \item When transforming one random variable $Y=g(X)$, first find $F_Y(y)$ and then differentiate.
+    \item The monotonic nature of $g(\cdot)$ determines whether inequality direction changes.
+    \item Final PDF formula for monotone transformations is:
+    \[
+    f_Y(y)=f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|
+    \]
+    \item For two random variables, distributions of expressions like $Z=X+Y$ are derived using joint probability region integration.
+\end{itemize}
+
+\section{Highlighted Problems Mentioned in Lecture (For Practice)}
+The lecture lists the following tasks for $Z=X+Y$:
+\begin{enumerate}
+    \item Find PDF of $Z$, $f_Z(z)$.
+    \item Find $f_Z(z)$ if $X$ and $Y$ are independent.
+    \item If $X\sim N(0,1)$ and $Y\sim N(0,1)$ are independent, prove $Z\sim N(0,2)$.
+    \item If $X$ and $Y$ are exponential RVs with parameter $\lambda$, find $f_Z(z)$.
+\end{enumerate}
+
+\textbf{Note:} The lecture slide only lists these as questions. No full derivation for these specific distributions is provided in the slides, hence they are not expanded here.
+
+\section{End of Lecture 11 Notes}
+This document strictly follows Lecture 11 slides and reconstructs the derivations as shown.
+
+\end{document}
