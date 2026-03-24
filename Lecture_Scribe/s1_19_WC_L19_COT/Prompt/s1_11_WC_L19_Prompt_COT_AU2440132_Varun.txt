@@ -1,0 +1,26 @@
+Given a lecture PDF, produce a **derivation-focused lecture scribe**.
+
+Goal:
+Enable exam revision by reconstructing how every important formula and result is derived.
+
+Rules:
+- Only include content from the lecture (no external additions).
+- For every formula:
+  - Show its origin (definition, assumption, or previous result)
+  - Derive it step-by-step
+  - Clearly state dependencies
+- Preserve original notation and symbols exactly.
+- Include proofs exactly as presented, with all logical steps.
+- Include examples only if present in the lecture.
+- Avoid intuition, storytelling, or simplification.
+- Keep the writing dense, structured, and exam-ready.
+
+Structure:
+- Notation & Preliminaries
+- Core Definitions
+- Step-by-Step Derivations (with source of each formula)
+- Proofs (complete and ordered)
+- Examples (if present)
+- Final Formula Sheet (derived results only)
+
+Do not explain beyond what is strictly necessary for reconstruction.
