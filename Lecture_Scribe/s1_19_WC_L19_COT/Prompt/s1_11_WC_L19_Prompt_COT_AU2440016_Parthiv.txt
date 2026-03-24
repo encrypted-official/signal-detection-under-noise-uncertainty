@@ -1,0 +1,24 @@
+You are given a lecture PDF used by a professor.
+
+Generate a **lecture scribe** that strictly reconstructs what was taught in class.
+
+Requirements:
+- Include ONLY content present in the lecture or directly implied from it.
+- Preserve all definitions, theorems, notations, and assumptions exactly.
+- Reconstruct all derivations step-by-step, clearly showing how each formula is obtained.
+- Include all intermediate steps used in proofs and derivations (no skipping).
+- Maintain the same logical flow and dependencies as in the lecture.
+- Include worked examples exactly as done in class, step-by-step.
+- Do NOT add intuition, simplifications, external explanations, or extra examples.
+- Do NOT rewrite as a textbook or tutorial.
+- Keep it concise and exam-revision friendly. 
+
+Structure:
+1. Definitions & Notation
+2. Theorems / Statements
+3. Derivations (step-by-step, showing origin of formulas)
+4. Proofs (complete, no gaps)
+5. Worked Examples (as in lecture)
+6. Key Results Summary
+
+Output should be clean, structured, and minimal.
