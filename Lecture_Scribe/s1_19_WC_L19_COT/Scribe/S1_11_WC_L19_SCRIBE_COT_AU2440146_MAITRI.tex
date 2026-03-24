@@ -1,0 +1,303 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor} 
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture 19 Scribe}
+\cfoot{\thepage}
+
+\title{\textbf{CSE400 -- Fundamentals of Probability in Computing}\\
+\large Lecture 19: N-Variate Joint PDF/PMF/CDF}
+\author{\textbf{Name:} Maitri Lad
+\textbf{Enrollnment no.:} AU2440146}
+\date{March 17, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Joint Distribution of Random Variables}
+
+\subsection{Definition}
+
+For random variables $X_1, X_2, \dots, X_N$, define:
+
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+The joint distribution describes the probability behavior of all variables together.
+
+It can be represented using:
+
+\[
+\text{Joint PMF, Joint PDF, Joint CDF}
+\]
+
+\section{Joint Gaussian Random Variables}
+
+\subsection{Joint Gaussian PDF}
+
+For two variables $X$ and $Y$:
+
+\[
+f_{X,Y}(x,y)
+=
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+\exp \left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+-
+2\rho
+\left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+\subsection{Parameters}
+
+\begin{itemize}
+\item $\mu_X, \mu_Y$ : means
+\item $\sigma_X, \sigma_Y$ : standard deviations
+\item $\rho$ : correlation coefficient
+\end{itemize}
+
+\section{Example 1: Joint Gaussian Variables}
+
+\subsection{Given}
+
+\[
+\mu_X = 2, \quad \sigma_X^2 = 1
+\]
+
+\[
+\mu_Y = -3, \quad \sigma_Y^2 = 4
+\]
+
+\[
+\text{cov}(X,Y) = -1
+\]
+
+\subsection{Goal}
+
+\begin{itemize}
+\item Write joint PDF $f_{XY}(x,y)$
+\item Find marginal PDFs $f_X(x), f_Y(y)$
+\item Find $P(X < 0)$
+\end{itemize}
+
+\section{Solution (a): Joint PDF Construction}
+
+\subsection{Step 1: Correlation Coefficient}
+
+\[
+\rho_{XY}
+=
+\frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+\]
+
+From given variances:
+
+\[
+\sigma_X = \sqrt{1} = 1, \quad \sigma_Y = \sqrt{4} = 2
+\]
+
+Substitute:
+
+\[
+\rho_{XY}
+=
+\frac{-1}{(1)(2)}
+=
+-\frac{1}{2}
+\]
+
+\subsection{Step 2: Substitute into General Formula}
+
+Using:
+
+\[
+\mu_X = 2, \quad \sigma_X = 1
+\]
+
+\[
+\mu_Y = -3, \quad \sigma_Y = 2
+\]
+
+\[
+\rho = -0.5
+\]
+
+\subsection{Final Joint PDF}
+
+\[
+f_{XY}(x,y)
+=
+\frac{1}{2\pi \sqrt{3}}
+\exp \left\{
+-\frac{2}{3}
+\left[
+(x-2)^2
++
+\frac{(x-2)(y+3)}{2}
++
+\frac{(y+3)^2}{4}
+\right]
+\right\}
+\]
+
+\section{Solution (b): Marginal PDFs}
+
+\subsection{Definition}
+
+\[
+f_X(x)
+=
+\int_{-\infty}^{\infty}
+f_{XY}(x,y)\,dy
+\]
+
+\[
+f_Y(y)
+=
+\int_{-\infty}^{\infty}
+f_{XY}(x,y)\,dx
+\]
+
+\subsection{Key Property}
+
+Since $X$ and $Y$ are jointly Gaussian:
+
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2)
+\]
+
+\[
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\subsection{Final Marginals}
+
+\[
+f_X(x)
+=
+\frac{1}{\sqrt{2\pi}}
+\exp\left(-\frac{(x-2)^2}{2}\right)
+\]
+
+\[
+f_Y(y)
+=
+\frac{1}{2\sqrt{2\pi}}
+\exp\left(-\frac{(y+3)^2}{8}\right)
+\]
+
+\section{Solution (c): CDF and Standardization}
+
+\subsection{Step 1: Identify the CDF}
+
+\[
+F_X(x) = P(X \le x)
+\]
+
+\[
+P(X < 0) = F_X(0)
+\]
+
+\subsection{Step 2: Standardization}
+
+\[
+X \sim \mathcal{N}(2,1)
+\]
+
+\[
+Z = \frac{X - \mu_X}{\sigma_X}
+\]
+
+\[
+P(X < 0)
+=
+P\left(\frac{X-2}{1} < \frac{0-2}{1}\right)
+=
+P(Z < -2)
+=
+\Phi(-2)
+\]
+
+\section{Solution (c): Symmetry and Q-function}
+
+\subsection{Step 3: Symmetry Property}
+
+\[
+\Phi(-x) = 1 - \Phi(x) = P(Z > x)
+\]
+
+\[
+P(Z < -2) = P(Z > 2)
+\]
+
+\subsection{Step 4: Q-function Relation}
+
+\[
+Q(x) = P(Z > x)
+\]
+
+\subsection{Final Answer}
+
+\[
+P(X < 0) = Q(2)
+\]
+
+\section{Application: Large MIMO System}
+
+\subsection{System Setup}
+
+Consider a wireless communication system with:
+
+\[
+M \text{ transmit antennas}, \quad N \text{ receive antennas}
+\]
+
+\section{Summary}
+
+\subsection{Joint Gaussian}
+
+\[
+f_{X,Y}(x,y)
+=
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+\exp(\cdots)
+\]
+
+\subsection{Marginals}
+
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2), \quad
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\subsection{Probability Result}
+
+\[
+P(X < 0) = Q(2)
+\]
+
+\end{document}
