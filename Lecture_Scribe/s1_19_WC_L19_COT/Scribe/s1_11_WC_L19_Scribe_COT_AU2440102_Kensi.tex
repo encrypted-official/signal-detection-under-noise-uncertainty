@@ -1,0 +1,252 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}}
+\author{\textbf{Kensi Patel - AU2440102}}
+\date{Lecture 19}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Lecture 19: N–Variate Joint PMF / PDF / CDF}
+
+Instructor: Dhaval Patel, PhD
+
+\section*{1. Joint Distribution of $N$ Random Variables}
+
+\textbf{Definition}
+\begin{itemize}
+    \item For random variable $X_1,X_2,\ldots,X_N$, the vector representation is
+\[\mathbf{X}=\begin{bmatrix}X_1\\X_2\\\vdots\\X_N\end{bmatrix}\]
+
+    \item The joint distribution describes the probability behaviour of all variables together.
+    \item It can be represented using:
+    \begin{itemize}
+        \item Joint PMF (discrete case)
+        \item Joint PDF (continuous case)
+        \item Joint CDF
+    \end{itemize}
+\end{itemize}
+(Definition slide — page 17)
+
+\section*{2. Joint PMF}
+
+For discrete random variables:
+\[P_{X_1,X_2,\ldots,X_N}(x_1,x_2,\ldots,x_N)=P(X_1=x_1,x_2,\ldots,X_N=x_N)\]
+(Page 22)
+
+\section*{3. Joint CDF}
+
+\[F_{X_1,\ldots,X_N}(x_1,\ldots,x_N)=P(X_1\le x_1,\ldots,X_N\le x_N)\]
+(Page 23)
+
+\section*{4. Joint PDF}
+
+Joint PDF is obtained by differentiating joint CDF:
+
+\[f_{X_1,\ldots,X_N}(x_1,\ldots,x_N)=\frac{\partial^N}{\partial x_1\cdots \partial x_N}F_{X_1,\ldots,X_N}(x_1,\ldots,x_N)\]
+(Page 24)
+
+\section*{5. Independence of Random Variables}
+
+Let
+\[\mathbf{X}=[X_1,X_2,\ldots,X_N]^T\]
+
+Variables are independent if:
+\[f_{\mathbf{X}}(x_1,\ldots,x_N)=\prod_{i=1}^{N} f_{X_i}(x_i)\]
+(Page 25)
+
+\section*{Example 1 — Jointly Gaussian Random Variables}
+
+Given:
+\[\mu_X=2,\quad \sigma_X^2=1\]
+\[\mu_Y=-3,\quad \sigma_Y^2=4\]
+\[\text{cov}(X,Y)=-1\]
+
+Find:
+\begin{itemize}
+    \item[(a)] Joint PDF
+    \item[(b)] Marginal PDFs
+    \item[(c)] $P(X<0)$
+\end{itemize}
+(Page 4)
+
+\subsection*{(a) Construction of Joint Gaussian PDF}
+
+\subsection*{Step 1: Correlation Coefficient}
+
+\[\rho_{XY}=\frac{\text{cov}(X,Y)}{\sigma_X\sigma_Y}\]
+From variances: 
+\[\sigma_X=\sqrt{1}= 1,\qquad \sigma_Y=\sqrt{4}= 2\]
+Substitute:
+\[\rho_{XY}=\frac{-1}{(1)(2)}= -\frac{1}{2}\]
+(Pages 7–8)
+
+\subsection*{Step 2: General Joint Gaussian Formula}
+
+\[f_{XY}(x,y)=\frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}\exp\left(-\frac{1}{2(1-\rho^2)}\left[\left(\frac{x-\mu_X}{\sigma_X}\right)^2-2\rho\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y}+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2\right]\right)\]
+(Page 5)
+
+\subsection*{Step 3: Substitute Values}
+
+\[\mu_X=2,\ \sigma_X=1,\ \mu_Y=-3,\ \sigma_Y=2,\ \rho=-0.5\]
+Final Joint PDF:
+\[f_{XY}(x,y)=\frac{1}{2\pi\sqrt{3}}\exp\left(-\frac{2}{3}\left[(x-2)^2+(x-2)(y+3)+\frac{(y+3)^2}{4}\right]\right)\]
+(Page 10)
+
+\subsection*{(b) Marginal PDFs}
+
+Marginals are obtained by integration:
+
+\[f_X(x)=\int_{-\infty}^{\infty} f_{XY}(x,y)\,dy\]
+\[f_Y(y)=\int_{-\infty}^{\infty} f_{XY}(x,y)\,dx\]
+(Page 11)
+
+\subsection*{Key Property}
+
+If variables are jointly Gaussian:
+\[X\sim N(2,1),\qquad Y\sim N(-3,4)\]
+Thus:
+\[f_X(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{(x-2)^2}{2}}\]
+\[f_Y(y)=\frac{1}{2\sqrt{2\pi}}e^{-\frac{(y+3)^2}{8}}\]
+(Page 12)
+
+\subsection*{(c) Probability $P(X<0)$}
+
+From marginal:
+\[X\sim N(2,1)\]
+
+\subsection*{Step 1: CDF Relation}
+\[P(X<0)=F_X(0)\]
+(Page 13)
+
+\subsection*{Step 2: Standardization}
+\[Z=\frac{X-\mu_X}{\sigma_X}\]
+\[P(X<0)=P\!\left(Z<\frac{0-2}{1}\right)=P(Z<-2)=\Phi(-2)\]
+(Page 14)
+
+\subsection*{Step 3: Symmetry of Normal CDF}
+\[\Phi(-x)=1-\Phi(x)=P(Z>x)\]
+Hence,
+\[P(Z<-2)=P(Z>2)\]
+(Page 15)
+
+\subsection*{Step 4: Relation to Q-Function}
+\[Q(x)=P(Z>x)\]
+
+\textbf{Final Answer}
+
+\[P(X<0)=Q(2)\]
+(Page 16)
+
+\section*{Application — Large MIMO System}
+\begin{itemize}
+    \item System has $M$ transmit antennas and $N$ receive antennas.
+    \item Each channel path coefficient $h_{ij}$ is modeled as a random variable.
+    \item Entire system represented by channel matrix:
+\end{itemize}
+\[H=\begin{bmatrix}
+h_{11} & \cdots & h_{1N} \\
+\vdots & \ddots & \vdots \\
+h_{M1} & \cdots & h_{MN}
+\end{bmatrix}\]
+(Pages 18–21)
+
+\section*{Example 2 — Uniformly Distributed 3D Vector}
+
+Region:
+\[|x_1|\le1,\quad |x_2|\le1,\quad |x_3|\le1\]
+
+Joint PDF:
+\[f(x_1,x_2,x_3)=
+\begin{cases}
+C,& \text{inside cube}\\
+0,& \text{otherwise}
+\end{cases}\]
+(Page 26)
+
+\subsection*{(a) Find Constant}
+Total probability = 1:
+\[\int_{-1}^{1}\int_{-1}^{1}\int_{-1}^{1}C\,dx_1dx_2dx_3=1\]
+\[C(2)(2)(2)=1\]
+\[C=\frac{1}{8}\]
+(Page 28)
+
+\subsection*{(b) Marginal Joint PDF $f_{X_1,X_2}$}
+
+\[f_{X_1,X_2}(x_1,x_2)=\int_{-1}^{1}\frac{1}{8}dx_3=\frac{1}{4}\]
+(Page 29)
+
+\subsection*{(c) Marginal PDF $f_{X_1}$}
+
+\[f_{X_1}(x_1)=\int_{-1}^{1}\int_{-1}^{1}\frac{1}{8}dx_2dx_3=\frac{1}{2}\]
+(Page 31)
+
+\subsection*{(d) Conditional PDFs}
+
+\[f_{X_1|X_2,X_3}=\frac{1/8}{1/4}=\frac{1}{2}\]
+(Page 33)
+
+\subsection*{(e) Conditional PDFs}
+\[f_{X_1,X_2|X_3}=\frac{1/8}{1/2}=\frac{1}{4}\]
+(Page 35)
+
+\subsection*{(f) Independence Check}
+LHS:
+\[f_{X_1,X_2,X_3}=\frac{1}{8}\]
+RHS:
+\[f_{X_1}f_{X_2}f_{X_3}=\frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2}=\frac{1}{8}\]
+Since LHS = RHS → variables are independent.
+
+(Page 39)
+
+
+\section*{Example 3 — Trivariate Exponential-type Distribution}
+
+Joint PDF:
+\[f_{XYZ}(x,y,z)=
+\begin{cases}
+Ke^{-(ax+by+cz)},& x,y,z>0\\
+0,& \text{otherwise}
+\end{cases}\]
+(Page 40)
+
+\subsection*{(a) Find $K$}
+
+\[\int_{0}^{\infty}\int_{0}^{\infty}\int_{0}^{\infty}K e^{-(ax+by+cz)}\,dx\,dy\,dz = 1\]
+
+\textbf{Factorization:}
+
+\[K\left(\frac{1}{a}\right)\left(\frac{1}{b}\right)\left(\frac{1}{c}\right)=1\]
+\[K=abc\]
+(Page 42)
+
+\subsection*{(b) Marginal Joint PDF}
+
+\[f_{XY}(x,y)=\int_{0}^{\infty} abc\,e^{-(ax+by+cz)}\,dz\]
+\[=ab\,e^{-(ax+by)}\]
+(Page 44)
+
+\subsection*{(c) Marginal PDF}
+
+\[f_X(x)=\int_{0}^{\infty} ab\,e^{-(ax+by)}\,dy\]
+\[= a e^{-ax}\]
+(Page 46)
+
+\subsection*{(d) Independence Check}
+
+\textbf{LHS:}
+\[f_{XYZ}=abc\,e^{-(ax+by+cz)}\]
+\textbf{RHS:}
+\[f_X f_Y f_Z=(a e^{-ax})(b e^{-by})(c e^{-cz})\]
+Thus:
+\[\text{LHS}=\text{RHS}\]
+Hence $X,Y,Z$ are independent.
+
+(Page 50)
+
+\end{document}
