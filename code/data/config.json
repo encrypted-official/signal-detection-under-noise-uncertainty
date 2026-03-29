@@ -15,7 +15,7 @@
         "snr_range_db": [-20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0],
         "num_trials": 1000,
         "noise_uncertainty_db": 1.0
-    }
+    },
     "importance_sampling": {
         "variance_inflation_factor": 3.0,
         "num_trials": 1000
